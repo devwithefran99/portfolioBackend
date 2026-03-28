@@ -1,0 +1,52 @@
+@media (max-width: 991px) {
+  .sidebar {
+    display: none !important;
+  }
+
+  .hero {
+    text-align: center;
+  }
+  .hero-img img {
+  max-width: 100%;
+  margin-left: 0px;
+}
+.intro-text{
+  margin-top: 20px;
+}
+.skilltext h2{
+  font-size: 30px;
+}
+.section-title{
+  font-size: 30px;
+}
+.filter-btn{
+  font-size: 13px;
+}
+.nav-btn {
+  width: 30px;
+height: 30px;
+}
+.filter-btn{
+  padding:5px 10px;
+  
+}
+.column-title{
+  text-align: center;
+  justify-content: center;
+}
+ .footer-bottom p {
+    font-size: 13px;
+  }
+  
+  .footer-bottom {
+    padding: 15px 10px;
+  }
+  .education{
+ padding: 7px 15px;
+}
+.title-3d h2{
+  font-size: 15px;
+}
+}
+
+
