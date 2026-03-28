@@ -787,15 +787,15 @@ design solutions.</p>
           <!-- Slide 1 -->
           <div class="feedback-item active">
             <img src="{{asset ('frontend/assets/images/Ellipse 28.png ')}}" class="client-img" alt="">
-            <h5>Erfan Shawon</h5>
-            <span class="location">Bangladesh</span>
+            <h5>Arena Alexis</h5>
+            <span class="location">USA</span>
 
             <div class="stars">
               ★★★★
             </div>
 
             <p>
-              Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+              Creative,professional and always delivers high-quality designs on time
             </p>
           </div>
 
@@ -810,22 +810,22 @@ design solutions.</p>
             </div>
 
             <p>
-              It has survived not only five centuries, but also the leap into electronic typesetting.
+              Great attention to detail with a strong sense of modern design trends.
             </p>
           </div>
 
           <!-- Slide 3 -->
           <div class="feedback-item">
             <img src="{{asset ('frontend/assets/images/WhatsApp Image 2025-11-30 at 9.28.26 PM.jpeg ')}}" class="client-img" alt="">
-            <h5>Alex Smith</h5>
-            <span class="location">UK</span>
+            <h5>Efran Shawon</h5>
+            <span class="location">BD</span>
 
             <div class="stars">
               ★★★★★
             </div>
 
             <p>
-              Remaining essentially unchanged. It was popularised in the 1960s.
+              Easy to communicate with and consistently brings ideas to life beautifully.
             </p>
           </div>
 
