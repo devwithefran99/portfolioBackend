@@ -20,7 +20,7 @@ document.querySelectorAll('.skill-card').forEach(card => {
 // heropart js
 const texts = [
     "Graphic & UI Designer",
-    "NSDA Certified",
+    "Creative Thinker",
     "Branding Specialist"
   ];
 
@@ -114,6 +114,15 @@ toggleBtn.onclick = ()=>{
 
   toggleBtn.innerText = expanded ? "Show Less" : "Show More";
 };
+
+// work toggle start
+document.querySelectorAll(".icon.love").forEach(btn=>{
+  btn.addEventListener("click",(e)=>{
+    e.stopPropagation(); // popup na khulte
+    btn.classList.toggle("active");
+  });
+});
+// work toggle ends
 // * trusted part starts
 $(document).ready(function(){
   let track = $('.client-track');
@@ -170,16 +179,6 @@ document.addEventListener("keydown", (e) => {
   }
 });
   // image-model ends
-
-var typed = new Typed('.typed', 
-    {
-    strings: [''],
-    typeSpeed: 60,
-    backSpeed: 130,
-    backDelay: 2000,
-    startDelay: 200,
-    loop: true,
-  });
  
   $(document).ready(function () {
     let index = 0;
@@ -231,6 +230,10 @@ var typed = new Typed('.typed',
       );
     }, 2000);
   });
+
+
+ 
+  
 
 
    AOS.init();
