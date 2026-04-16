@@ -1,3 +1,5 @@
+
+
 // progress bar
 document.querySelectorAll('.skill-card').forEach(card => {
   const percent = parseInt(card.dataset.percent);

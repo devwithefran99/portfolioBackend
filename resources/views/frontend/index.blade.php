@@ -16,6 +16,7 @@
     <!-- link part ends here -->
 </head>
 <body>
+
     <header>
         <!-- nav bar starts -->
          <section id="Home">
