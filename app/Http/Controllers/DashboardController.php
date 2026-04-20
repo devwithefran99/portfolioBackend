@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Contact;
-use Illuminate\Http\Request;
 use App\Models\Visitor;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
@@ -14,7 +14,7 @@ class DashboardController extends Controller
         $contacts = Contact::latest()->get();
         $totalVisitors = Visitor::count();
 
-        // ✅ Monthly visitor count (real DB theke)
+        // Monthly visitor count
         $monthlyVisitors = [];
 
         for ($i = 1; $i <= 12; $i++) {
