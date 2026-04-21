@@ -16,6 +16,15 @@
     <!-- link part ends here -->
 </head>
 <body>
+  <!-- preloader here -->
+<!-- Preloader -->
+<div id="preloader">
+  <div class="loader-wrapper">
+    <img src="{{asset ('frontend/assets/images/ekram logo.png ')}}" alt="Logo" class="logo">
+    <div class="glow"></div>
+  </div>
+</div>
+  <!-- preloader ends here -->
     <header>
         <!-- nav bar starts -->
          <section id="Home">
@@ -407,7 +416,7 @@ design solutions.</p>
        data-img="{{asset('frontend/assets/images/Frame 2.jpeg')}}">
 
     <div class="img-wrapper">
-      <img src="{{asset('frontend/assets/images/wecardsCvr.jpeg')}}" 
+      <img src="{{asset('frontend/assets/images/wecardCvr.jpeg')}}" 
            class="w-100" 
            alt="">
 

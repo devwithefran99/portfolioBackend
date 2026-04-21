@@ -1,3 +1,24 @@
+// preloader js
+const startTime = Date.now();
+
+  window.addEventListener("load", function () {
+    const preloader = document.getElementById("preloader");
+
+    const minDuration = 1500; 
+    const elapsed = Date.now() - startTime;
+
+    const delay = Math.max(minDuration - elapsed, 0);
+
+    setTimeout(() => {
+      preloader.style.transition = "0.5s ease";
+      preloader.style.opacity = "0";
+
+      setTimeout(() => {
+        preloader.style.display = "none";
+      }, 500);
+    }, delay);
+  });
+
 // progress bar
 document.querySelectorAll('.skill-card').forEach(card => {
   const percent = parseInt(card.dataset.percent);
