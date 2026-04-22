@@ -255,273 +255,80 @@ design solutions.</p>
 <!-- Mywork part Starts -->
 <section id="workPart">
   <div class="container py-5">
-
+ 
     <div class="section-title-box text-center mb-4">
       <div class="title-3d">
         <h2 class="section-title">My Work</h2>
       </div>
-
-      <p class="section-subtitle mt-3">
-        A quick overview of my Projects & Design
-      </p>
+      <p class="section-subtitle mt-3">A quick overview of my Projects & Design</p>
     </div>
-
+ 
     <!-- Filter Buttons -->
     <div class="d-flex justify-content-center gap-2 mb-4">
       <button class="filter-btn active" data-filter="mobile">Social Media</button>
       <button class="filter-btn" data-filter="web">Web Design</button>
       <button class="filter-btn" data-filter="social">Branding</button>
     </div>
-
+ 
     <!-- Work Grid -->
     <div class="row g-4" id="workGrid">
-
-      <!-- ===== MOBILE APP (6 + 6) ===== -->
-     
-<div class="col-lg-4 col-md-6 work-item mobile visible">
-  <div class="work-card popup-trigger" 
-       data-img="{{asset('frontend/assets/images/Social-media-fruit-project.jpeg')}}">
-
-    <div class="img-wrapper">
-      <img src="{{asset('frontend/assets/images/cover 1.jpeg')}}" 
-           class="w-100" 
-           alt="">
-
-      <!-- Overlay -->
-      <div class="overlay">
-        <div class="icons">
-          <span class="icon view"><i class="bi bi-eye"></i></span>
-          <span class="icon love"><i class="bi bi-heart"></i></span>
-        </div>
-      </div>
-    </div>
-
-    <div class="content">
-      <span class="date">26 Dec 2025</span>
-      <h6>Creative Fruit Poster Design</h6>
-    </div>
-
-  </div>
-</div>
-      <div class="col-lg-4 col-md-6 work-item mobile visible">
-        <div class="work-card">
-          <div class="w-100">
-            <img src="{{asset ('frontend/assets/images/poster cvr 1.jpeg ')}}" alt="">
+ 
+      @forelse($works as $work)
+      <div class="col-lg-4 col-md-6 work-item {{ $work->category }} {{ $work->is_extra ? 'extra' : 'visible' }}">
+ 
+        @if($work->popup_image)
+        {{-- Card with popup trigger --}}
+        <div class="work-card popup-trigger"
+             data-img="{{ asset('storage/' . $work->popup_image) }}">
+          <div class="img-wrapper">
+            <img src="{{ asset('storage/' . $work->cover_image) }}"
+                 class="w-100" alt="{{ $work->title }}">
+            <div class="overlay">
+              <div class="icons">
+                <span class="icon view"><i class="bi bi-eye"></i></span>
+                <span class="icon love"><i class="bi bi-heart"></i></span>
+              </div>
+            </div>
           </div>
           <div class="content">
-            <span class="date">26 Dec 2025</span>
-            <h6>Social Media Post Design</h6>
+            <span class="date">{{ $work->work_date ? $work->work_date->format('d M Y') : '' }}</span>
+            <h6>{{ $work->title }}</h6>
           </div>
         </div>
-      </div>
-
-      <div class="col-lg-4 col-md-6 work-item mobile visible">
+ 
+        @else
+        {{-- Card without popup --}}
         <div class="work-card">
-          <div class="w-100">
-            <img src="{{asset ('frontend/assets/images/social media cvr 2.jpeg ')}}" alt="">
+          <div class="img-wrapper">
+            <img src="{{ asset('storage/' . $work->cover_image) }}"
+                 class="w-100" alt="{{ $work->title }}">
+            <div class="overlay">
+              <div class="icons">
+                <span class="icon love"><i class="bi bi-heart"></i></span>
+              </div>
+            </div>
           </div>
           <div class="content">
-            <span class="date">26 Dec 2025</span>
-            <h6>Ad Design for Restaurant</h6>
+            <span class="date">{{ $work->work_date ? $work->work_date->format('d M Y') : '' }}</span>
+            <h6>{{ $work->title }}</h6>
           </div>
         </div>
+        @endif
+ 
       </div>
-
-      <div class="col-lg-4 col-md-6 work-item mobile visible">
-  <div class="work-card popup-trigger" 
-       data-img="{{asset('frontend/assets/images/perfumeProject (1).jpeg')}}">
-
-    <div class="img-wrapper">
-      <img src="{{asset('frontend/assets/images/perfume-behance-cover.jpeg')}}" 
-           class="w-100" 
-           alt="">
-
-      <!-- Overlay -->
-      <div class="overlay">
-        <div class="icons">
-          <span class="icon view"><i class="bi bi-eye"></i></span>
-          <span class="icon love"><i class="bi bi-heart"></i></span>
-        </div>
+      @empty
+      <div class="col-12 text-center py-5">
+        <p class="text-muted">এখনো কোনো কাজ যোগ করা হয়নি।</p>
       </div>
+      @endforelse
+ 
     </div>
-
-    <div class="content">
-      <span class="date">26 Dec 2025</span>
-      <h6>Creative Fruit Poster Design</h6>
-    </div>
-
-  </div>
-</div>
-
-      <div class="col-lg-4 col-md-6 work-item mobile visible">
-        <div class="work-card">
-          <div class="w-100">
-            <img src="{{asset ('frontend/assets/images/social media 3.jpeg')}}" alt="">
-          </div>
-          <div class="content">
-            <span class="date">26 Dec 2025</span>
-            <h6>Creative Ads | Agency Branding</h6>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-4 col-md-6 work-item mobile visible">
-  <div class="work-card popup-trigger" 
-       data-img="{{asset('frontend/assets/images/porchex-project.jpeg')}}">
-
-    <div class="img-wrapper">
-      <img src="{{asset('frontend/assets/images/project cover.png')}}" 
-           class="w-100" 
-           alt="">
-
-      <!-- Overlay -->
-      <div class="overlay">
-        <div class="icons">
-          <span class="icon view"><i class="bi bi-eye"></i></span>
-          <span class="icon love"><i class="bi bi-heart"></i></span>
-        </div>
-      </div>
-    </div>
-
-    <div class="content">
-      <span class="date">26 Dec 2025</span>
-      <h6>Creative Fruit Poster Design</h6>
-    </div>
-
-  </div>
-</div>
-
-      <!-- Extra Mobile -->
-      <div class="col-lg-4 col-md-6 work-item mobile extra">
-        <div class="work-card"><div class="img-placeholder"></div><div class="content"><h6>Travel App</h6></div></div>
-      </div>
-      <div class="col-lg-4 col-md-6 work-item mobile extra">
-        <div class="work-card"><div class="img-placeholder"></div><div class="content"><h6>Chat App</h6></div></div>
-      </div>
-       <div class="col-lg-4 col-md-6 work-item mobile extra">
-        <div class="work-card"><div class="img-placeholder"></div><div class="content"><h6>Gaming App</h6></div></div>
-      </div>
-
-      <!-- ===== WEB DESIGN ===== -->
-       <div class="col-lg-4 col-md-6 work-item web visible">
-  <div class="work-card popup-trigger" 
-       data-img="{{asset('frontend/assets/images/Frame 2.jpeg')}}">
-
-    <div class="img-wrapper">
-      <img src="{{asset('frontend/assets/images/wecardsCvr.jpeg')}}" 
-           class="w-100" 
-           alt="">
-
-      <!-- Overlay -->
-      <div class="overlay">
-        <div class="icons">
-          <span class="icon view"><i class="bi bi-eye"></i></span>
-          <span class="icon love"><i class="bi bi-heart"></i></span>
-        </div>
-      </div>
-    </div>
-
-    <div class="content">
-      <span class="date">26 Dec 2025</span>
-      <h6>Creative Fruit Poster Design</h6>
-    </div>
-
-  </div>
-</div>
-      <div class="col-lg-4 col-md-6 work-item web visible">
-        <div class="work-card">
-          <div class="w-100">
-            <img src="{{asset ('frontend/assets/images/mobile app1.jpeg')}}" alt="">
-          </div>
-          <div class="content">
-            <span class="date">26 Dec 2025</span>
-            <h6>Personal portfolio website design</h6>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-4 col-md-6 work-item web visible">
-        <div class="work-card">
-          <div class="w-100">
-            <img src="{{asset ('frontend/assets/images/medical-website-mockup.jpeg')}}" alt="">
-          </div>
-          <div class="content">
-            <span class="date">26 Dec 2025</span>
-            <h6>Landing page design for Medical</h6>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-4 col-md-6 work-item web extra">
-        <div class="work-card">
-          <div class="img-placeholder"></div>
-          <div class="content"><h6>Agency Website</h6></div>
-        </div>
-      </div>
-
-      <!-- ===== SOCIAL MEDIA ===== -->
-      <div class="col-lg-4 col-md-6 work-item social visible">
-  <div class="work-card popup-trigger" 
-       data-img="{{asset('frontend/assets/images/wikitech-thamProject.jpeg')}}">
-
-    <div class="img-wrapper">
-      <img src="{{asset('frontend/assets/images/wikitech-tham1.jpeg')}}" 
-           class="w-100" 
-           alt="">
-
-      <!-- Overlay -->
-      <div class="overlay">
-        <div class="icons">
-          <span class="icon view"><i class="bi bi-eye"></i></span>
-          <span class="icon love"><i class="bi bi-heart"></i></span>
-        </div>
-      </div>
-    </div>
-
-    <div class="content">
-      <span class="date">26 Dec 2025</span>
-      <h6>Creative Fruit Poster Design</h6>
-    </div>
-
-  </div>
-</div>
-      <div class="col-lg-4 col-md-6 work-item social visible">
-  <div class="work-card popup-trigger" 
-       data-img="{{asset('frontend/assets/images/wecardProject.jpeg')}}">
-
-    <div class="img-wrapper">
-      <img src="{{asset('frontend/assets/images/BrandGuideline.jpeg')}}" 
-           class="w-100" 
-           alt="">
-
-      <!-- Overlay -->
-      <div class="overlay">
-        <div class="icons">
-          <span class="icon view"><i class="bi bi-eye"></i></span>
-          <span class="icon love"><i class="bi bi-heart"></i></span>
-        </div>
-      </div>
-    </div>
-
-    <div class="content">
-      <span class="date">26 Dec 2025</span>
-      <h6>Creative Fruit Poster Design</h6>
-    </div>
-
-  </div>
-</div>
-
-      <div class="col-lg-4 col-md-6 work-item social extra">
-        <div class="work-card"><div class="img-placeholder"></div><div class="content"><h6>Ad Creative</h6></div></div>
-      </div>
-
-    </div>
-
+ 
     <!-- Button -->
     <div class="text-center mt-3">
       <button id="toggleBtn" class="moreBtn">Show More</button>
     </div>
-
+ 
   </div>
 </section>
 
