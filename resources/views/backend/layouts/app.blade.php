@@ -134,12 +134,12 @@
 
               <ul class="menu-sub">
                 <li class="menu-item">
-  <a href="{{ route('add.work') }}" class="menu-link">
+  <a href="{{ route('works.create') }}" class="menu-link">
     <div data-i18n="Without menu">Add Work</div>
   </a>
 </li>
 <li class="menu-item">
-  <a href="{{ route('all.work') }}" class="menu-link">
+  <a href="{{ route('works.index') }}" class="menu-link">
     <div data-i18n="Without navbar">All Work</div>
   </a>
 </li>
