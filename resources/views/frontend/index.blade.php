@@ -16,6 +16,7 @@
     <!-- link part ends here -->
 </head>
 <body>
+<<<<<<< HEAD
   <!-- preloader here -->
 <!-- Preloader -->
 <div id="preloader">
@@ -25,6 +26,9 @@
   </div>
 </div>
   <!-- preloader ends here -->
+=======
+
+>>>>>>> c7a18abf38ecffde721b933ae85375756df13d41
     <header>
         <!-- nav bar starts -->
          <section id="Home">

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // preloader js
 const startTime = Date.now();
 
@@ -18,6 +19,9 @@ const startTime = Date.now();
       }, 500);
     }, delay);
   });
+=======
+
+>>>>>>> c7a18abf38ecffde721b933ae85375756df13d41
 
 // progress bar
 document.querySelectorAll('.skill-card').forEach(card => {
