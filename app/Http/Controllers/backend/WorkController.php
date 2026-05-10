@@ -28,8 +28,8 @@ class WorkController extends Controller
         $request->validate([
             'title'        => 'required|string|max:255',
             'category'     => 'required|in:mobile,web,social',
-            'cover_image'  => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:4096',
-            'popup_image'  => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:6144',
+            'cover_image'  => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:10240',
+            'popup_image'  => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:10240',
             'work_date'    => 'nullable|date',
             'is_extra'     => 'nullable|boolean',
             'sort_order'   => 'nullable|integer',

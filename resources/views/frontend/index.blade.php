@@ -16,8 +16,6 @@
     <!-- link part ends here -->
 </head>
 <body>
-<<<<<<< HEAD
-  <!-- preloader here -->
 <!-- Preloader -->
 <div id="preloader">
   <div class="loader-wrapper">
@@ -26,9 +24,6 @@
   </div>
 </div>
   <!-- preloader ends here -->
-=======
-
->>>>>>> c7a18abf38ecffde721b933ae85375756df13d41
     <header>
         <!-- nav bar starts -->
          <section id="Home">
@@ -335,183 +330,7 @@ design solutions.</p>
       @endforelse
  
     </div>
-<<<<<<< HEAD
 
-    <div class="content">
-      <span class="date">26 Dec 2025</span>
-      <h6>Creative Fruit Poster Design</h6>
-    </div>
-
-  </div>
-</div>
-
-      <div class="col-lg-4 col-md-6 work-item mobile visible">
-        <div class="work-card">
-          <div class="w-100">
-            <img src="{{asset ('frontend/assets/images/social media 3.jpeg')}}" alt="">
-          </div>
-          <div class="content">
-            <span class="date">26 Dec 2025</span>
-            <h6>Creative Ads | Agency Branding</h6>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-4 col-md-6 work-item mobile visible">
-  <div class="work-card popup-trigger" 
-       data-img="{{asset('frontend/assets/images/porchex-project.jpeg')}}">
-
-    <div class="img-wrapper">
-      <img src="{{asset('frontend/assets/images/project cover.png')}}" 
-           class="w-100" 
-           alt="">
-
-      <!-- Overlay -->
-      <div class="overlay">
-        <div class="icons">
-          <span class="icon view"><i class="bi bi-eye"></i></span>
-          <span class="icon love"><i class="bi bi-heart"></i></span>
-        </div>
-      </div>
-    </div>
-
-    <div class="content">
-      <span class="date">26 Dec 2025</span>
-      <h6>Creative Fruit Poster Design</h6>
-    </div>
-
-  </div>
-</div>
-
-      <!-- Extra Mobile -->
-      <div class="col-lg-4 col-md-6 work-item mobile extra">
-        <div class="work-card"><div class="img-placeholder"></div><div class="content"><h6>Travel App</h6></div></div>
-      </div>
-      <div class="col-lg-4 col-md-6 work-item mobile extra">
-        <div class="work-card"><div class="img-placeholder"></div><div class="content"><h6>Chat App</h6></div></div>
-      </div>
-       <div class="col-lg-4 col-md-6 work-item mobile extra">
-        <div class="work-card"><div class="img-placeholder"></div><div class="content"><h6>Gaming App</h6></div></div>
-      </div>
-
-      <!-- ===== WEB DESIGN ===== -->
-       <div class="col-lg-4 col-md-6 work-item web visible">
-  <div class="work-card popup-trigger" 
-       data-img="{{asset('frontend/assets/images/Frame 2.jpeg')}}">
-
-    <div class="img-wrapper">
-      <img src="{{asset('frontend/assets/images/wecardCvr.jpeg')}}" 
-           class="w-100" 
-           alt="">
-
-      <!-- Overlay -->
-      <div class="overlay">
-        <div class="icons">
-          <span class="icon view"><i class="bi bi-eye"></i></span>
-          <span class="icon love"><i class="bi bi-heart"></i></span>
-        </div>
-      </div>
-    </div>
-
-    <div class="content">
-      <span class="date">26 Dec 2025</span>
-      <h6>Creative Fruit Poster Design</h6>
-    </div>
-
-  </div>
-</div>
-      <div class="col-lg-4 col-md-6 work-item web visible">
-        <div class="work-card">
-          <div class="w-100">
-            <img src="{{asset ('frontend/assets/images/mobile app1.jpeg')}}" alt="">
-          </div>
-          <div class="content">
-            <span class="date">26 Dec 2025</span>
-            <h6>Personal portfolio website design</h6>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-4 col-md-6 work-item web visible">
-        <div class="work-card">
-          <div class="w-100">
-            <img src="{{asset ('frontend/assets/images/medical-website-mockup.jpeg')}}" alt="">
-          </div>
-          <div class="content">
-            <span class="date">26 Dec 2025</span>
-            <h6>Landing page design for Medical</h6>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-4 col-md-6 work-item web extra">
-        <div class="work-card">
-          <div class="img-placeholder"></div>
-          <div class="content"><h6>Agency Website</h6></div>
-        </div>
-      </div>
-
-      <!-- ===== SOCIAL MEDIA ===== -->
-      <div class="col-lg-4 col-md-6 work-item social visible">
-  <div class="work-card popup-trigger" 
-       data-img="{{asset('frontend/assets/images/wikitech-thamProject.jpeg')}}">
-
-    <div class="img-wrapper">
-      <img src="{{asset('frontend/assets/images/wikitech-tham1.jpeg')}}" 
-           class="w-100" 
-           alt="">
-
-      <!-- Overlay -->
-      <div class="overlay">
-        <div class="icons">
-          <span class="icon view"><i class="bi bi-eye"></i></span>
-          <span class="icon love"><i class="bi bi-heart"></i></span>
-        </div>
-      </div>
-    </div>
-
-    <div class="content">
-      <span class="date">26 Dec 2025</span>
-      <h6>Creative Fruit Poster Design</h6>
-    </div>
-
-  </div>
-</div>
-      <div class="col-lg-4 col-md-6 work-item social visible">
-  <div class="work-card popup-trigger" 
-       data-img="{{asset('frontend/assets/images/wecardProject.jpeg')}}">
-
-    <div class="img-wrapper">
-      <img src="{{asset('frontend/assets/images/BrandGuideline.jpeg')}}" 
-           class="w-100" 
-           alt="">
-
-      <!-- Overlay -->
-      <div class="overlay">
-        <div class="icons">
-          <span class="icon view"><i class="bi bi-eye"></i></span>
-          <span class="icon love"><i class="bi bi-heart"></i></span>
-        </div>
-      </div>
-    </div>
-
-    <div class="content">
-      <span class="date">26 Dec 2025</span>
-      <h6>Creative Fruit Poster Design</h6>
-    </div>
-
-  </div>
-</div>
-
-      <div class="col-lg-4 col-md-6 work-item social extra">
-        <div class="work-card"><div class="img-placeholder"></div><div class="content"><h6>Ad Creative</h6></div></div>
-      </div>
-
-    </div>
-
-=======
- 
->>>>>>> 2d846ef2e461daca93d7a01770320099ffc1df45
     <!-- Button -->
     <div class="text-center mt-3">
       <button id="toggleBtn" class="moreBtn">Show More</button>
@@ -805,6 +624,11 @@ design solutions.</p>
           <h5 class="mb-4">
             Send Your <span>Message</span>
           </h5>
+          @if(session('success'))
+    <div class="alert alert-success mb-3">
+        ✅ {{ session('success') }}
+    </div>
+@endif
 
           <form method="POST" action="/contact-submit">
   @csrf

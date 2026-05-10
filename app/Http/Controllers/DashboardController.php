@@ -32,16 +32,23 @@ class DashboardController extends Controller
         ));
     }
 
-    public function store(Request $request)
-    {
-        Contact::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'message' => $request->message,
-        ]);
+   public function store(Request $request)
+{
+    $request->validate([
+        'name'    => 'required|string|max:255',
+        'email'   => 'required|email|max:255',
+        'message' => 'required|string',
+    ]);
 
-        return back()->with('success', 'Message sent successfully!');
-    }
+    Contact::create([
+        'name'    => $request->name,
+        'email'   => $request->email,
+        'message' => $request->message,
+    ]);
+
+    // back() এর বদলে redirect() দিন
+    return redirect('/')->with('success', 'Message sent successfully!');
+}
 
     public function done($id)
     {
