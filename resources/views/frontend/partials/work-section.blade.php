@@ -24,6 +24,7 @@
       <button class="filter-btn active" data-filter="mobile">Social Media</button>
       <button class="filter-btn" data-filter="web">Web Design</button>
       <button class="filter-btn" data-filter="social">Branding</button>
+     
     </div>
 
     <!-- Work Grid -->

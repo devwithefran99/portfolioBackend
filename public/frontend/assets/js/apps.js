@@ -37,6 +37,66 @@ document.querySelectorAll('.skill-card').forEach(card => {
   }, 20);
 });
 
+// counter part starts
+const stats = [
+  { iconClass:"ti ti-mood-smile anim-pulse",  label:"Happy Clients",       target:37,  suffix:"+",  duration:2200, isFloat:false },
+  { iconClass:"ti ti-trophy anim-bounce",     label:"Years of Experience", target:3,   suffix:"+",  duration:1600, isFloat:false },
+  { iconClass:"ti ti-briefcase anim-shake",   label:"Projects Completed",  target:73,  suffix:"+",  duration:2500, isFloat:false },
+  { iconClass:"ti ti-star anim-spin",         label:"Overall Rating",      target:4.4,  suffix:"/5", duration:2000, isFloat:true  },
+];
+
+const grid = document.getElementById("statsGrid");
+
+stats.forEach((s, i) => {
+  const card = document.createElement("div");
+  card.className = "stat-card";
+  card.innerHTML = `
+    <div class="stat-icon"><i class="${s.iconClass}" aria-hidden="true"></i></div>
+    <div class="stat-number" id="num-${i}"><span class="val">${s.isFloat ? "0.0" : "0"}</span><span class="suffix">${s.suffix}</span></div>
+    <div class="stat-label">${s.label}</div>
+    <div class="stat-bar"><div class="stat-bar-fill" id="bar-${i}"></div></div>
+  `;
+  grid.appendChild(card);
+});
+
+function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
+
+function animateCounter(i, target, duration, isFloat) {
+  const el = document.querySelector(`#num-${i} .val`);
+  const bar = document.getElementById(`bar-${i}`);
+  const start = performance.now();
+  function step(now) {
+    const elapsed = now - start;
+    const progress = Math.min(elapsed / duration, 1);
+    const eased = easeOut(progress);
+    const current = eased * target;
+    el.textContent = isFloat ? current.toFixed(1) : Math.floor(current).toLocaleString();
+    if (bar) bar.style.width = (eased * (isFloat ? (target/5)*100 : 100)) + "%";
+    if (progress < 1) {
+      requestAnimationFrame(step);
+    } else {
+      el.textContent = isFloat ? target.toFixed(1) : target.toLocaleString();
+      if (bar) bar.style.width = (isFloat ? (target/5)*100 : 100) + "%";
+    }
+  }
+  requestAnimationFrame(step);
+}
+
+function startCounters() {
+  stats.forEach((s, i) => animateCounter(i, s.target, s.duration, s.isFloat));
+}
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      setTimeout(startCounters, 500);
+      observer.disconnect();
+    }
+  });
+}, { threshold: 0.3 });
+
+observer.observe(grid);
+// counter part ends
 // heropart js
 const texts = [
     "Graphic & UI Designer",
