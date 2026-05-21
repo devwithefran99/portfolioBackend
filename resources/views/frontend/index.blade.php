@@ -3,18 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ekram Hossen Portfolio</title>
-    <!-- link part start here -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
- <link rel="stylesheet" href="{{ asset('frontend/assets/css/bootstrap.min.css') }}">
-<link rel="stylesheet" href="{{ asset('frontend/assets/css/style.css') }}">
-<link rel="stylesheet" href="{{ asset('frontend/assets/css/responsive.css') }}">
-    <!-- link part ends here -->
+
+    <!-- Primary SEO -->
+    <title>Ekram Hossen | Graphic & UI Designer — Chattogram</title>
+    <meta name="description" content="Ekram Hossen — Graphic Designer with 3+ years of experience in UI/UX, Branding & Social Media Design. Based in Chattogram, Bangladesh.">
+    <meta name="keywords" content="Graphic Designer, UI Designer, Branding, Chattogram, Bangladesh, Ekram Hossen, Photoshop, Figma, Illustrator">
+    <meta name="author" content="Ekram Hossen">
+    <meta name="robots" content="index, follow">
+
+    <!-- Canonical URL -->
+    {{-- <link rel="canonical" href="https://yourdomain.com/"> --}}
+
+    <!-- ✅ Favicon -->
+    <link rel="icon" type="image/png" href="{{ asset('frontend/assets/images/ekram logo.png') }}">
+    <link rel="apple-touch-icon" href="{{ asset('frontend/assets/images/ekram logo.png') }}">
+
+    <!-- ✅ Open Graph (Facebook, LinkedIn share) -->
+    <meta property="og:type" content="website">
+    {{-- <meta property="og:url" content="https://yourdomain.com/"> --}}
+    <meta property="og:title" content="Ekram Hossen | Graphic & UI Designer">
+    <meta property="og:description" content="Graphic Designer with 3+ years of experience in UI/UX, Branding & Social Media Design. Based in Chattogram, Bangladesh.">
+    <meta property="og:image" content="{{ asset('frontend/assets/images/my-image-2.png') }}">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:site_name" content="Ekram Hossen Portfolio">
+
+    <!-- ✅ Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Ekram Hossen | Graphic & UI Designer">
+    <meta name="twitter:description" content="Graphic Designer with 3+ years of experience in UI/UX, Branding & Social Media Design.">
+    {{-- <meta name="twitter:image" content="{{ asset('frontend/assets/images/my-image-2.png') }}"> --}}
+
+    <!-- fonts & CSS — আগের মতোই রাখো -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link rel="preload" as="style"
+  href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+    <link rel="stylesheet" href="{{ asset('frontend/assets/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/assets/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/assets/css/responsive.css') }}">
 </head>
 <body>
 <!-- Preloader -->
@@ -48,16 +76,16 @@
           <a class="nav-link active" aria-current="page" href="#skills">Skills</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#workPart">Works</a>
+          <a class="nav-link active" aria-current="page" href="#services">Services</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#workPart">Blogs</a>
+          <a class="nav-link active" aria-current="page" href="#workPart">Works</a>
         </li>
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="#about">About me</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#contact">Cantact</a>
+          <a class="nav-link active" aria-current="page" href="#contact">Contact</a>
         </li>
       </ul>
      <div class="cvBtn">
@@ -76,19 +104,20 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="#skills">Skills</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#workPart">Works</a>
+         <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#services">Services</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#workPart">Blogs</a>
+          <a class="nav-link active" aria-current="page" href="#workPart">Works</a>
         </li>
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="#about">About me</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#contact">Cantact</a>
+          <a class="nav-link active" aria-current="page" href="#contact">Contact</a>
         </li>
       </ul>
+      
  <div class="cvBtn">
        <a href="{{asset ('frontend/assets/images/cvEkram.pdf') }}"
    download="Ekram-Hossen-CV">
@@ -267,6 +296,85 @@ design solutions.</p>
   </div>
 </section>
 <!-- skill parts ends  -->
+
+{{-- service part starts --}}
+<!-- Services Section -->
+<section id="services" class="services-section py-5">
+  <div class="container">
+
+    <div class="section-title-box text-center mb-5">
+      <div class="title-3d">
+        <h2 class="section-title">My Services</h2>
+      </div>
+      <p class="section-subtitle mt-3">What I can do for you</p>
+    </div>
+
+    <div class="services-list">
+
+      <!-- 01 -->
+      <div class="srv-item">
+        <div class="srv-top">
+          <span class="srv-num">01</span>
+          <h3 class="srv-title">Brand Identity</h3>
+          <div class="srv-tags">
+            <span>Logo Design</span><span>Color Palette</span><span>Typography</span>
+          </div>
+        </div>
+        <div class="srv-expand">
+          <p>Complete branding solution — from concept to final delivery. I craft logos and visual identities that make your business instantly recognizable.</p>
+          <a href="#contact" class="srv-btn">Discuss Project</a>
+        </div>
+      </div>
+
+      <!-- 02 -->
+      <div class="srv-item">
+        <div class="srv-top">
+          <span class="srv-num">02</span>
+          <h3 class="srv-title">Social Media Design</h3>
+          <div class="srv-tags">
+            <span>Posts</span><span>Stories</span><span>Banners</span>
+          </div>
+        </div>
+        <div class="srv-expand">
+          <p>Eye-catching social media visuals that boost engagement. Consistent design across all platforms to build a strong online presence.</p>
+          <a href="#contact" class="srv-btn">Discuss Project</a>
+        </div>
+      </div>
+
+      <!-- 03 -->
+      <div class="srv-item">
+        <div class="srv-top">
+          <span class="srv-num">03</span>
+          <h3 class="srv-title">UI/UX Design</h3>
+          <div class="srv-tags">
+            <span>Figma</span><span>Wireframe</span><span>Prototype</span>
+          </div>
+        </div>
+        <div class="srv-expand">
+          <p>Clean, modern interfaces for web & mobile apps. User-centered design that balances aesthetics with usability.</p>
+          <a href="#contact" class="srv-btn">Discuss Project</a>
+        </div>
+      </div>
+
+      <!-- 04 -->
+      <div class="srv-item">
+        <div class="srv-top">
+          <span class="srv-num">04</span>
+          <h3 class="srv-title">Print Design</h3>
+          <div class="srv-tags">
+            <span>Business Card</span><span>Brochure</span><span>Flyer</span>
+          </div>
+        </div>
+        <div class="srv-expand">
+          <p>Print-ready designs that leave a lasting impression. From business cards to large format banners — pixel perfect every time.</p>
+          <a href="#contact" class="srv-btn">Discuss Project</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+{{-- servide ended --}}
 <!-- Mywork part Starts -->
 <section id="workPart">
   <div class="container py-5">
@@ -495,10 +603,12 @@ design solutions.</p>
           <p class="email">ekramhusain60@gmail.com</p>
 
           <div class="aboutBtn">
-            <a class="btn btn-primary rounded-pill mt-3">
-            Download CV
-          </a>
-          </div>
+    <a href="{{ asset('frontend/assets/images/cvEkram.pdf') }}"
+       download="Ekram-Hossen-CV"
+       class="btn btn-primary rounded-pill mt-3">
+        <i class="bi bi-cloud-download-fill me-1"></i> Download CV
+    </a>
+</div>
         </div>
       </div>
 
@@ -519,7 +629,7 @@ design solutions.</p>
 
               <p>
                 Born and raised in Chattogram,Bangladesh. When not designing,
-                I enjoy board games and cooking arepas.
+                I enjoy exploring new design trends and photography.
               </p>
             </div>
           </div>
@@ -550,7 +660,7 @@ design solutions.</p>
                 <span>Figma</span>
                 <span>Photoshop</span>
                 <span>Illustrator</span>
-                <span>adove XD</span>
+                <span>Adobe XD</span>
               </div>
             </div>
           </div>
@@ -638,21 +748,29 @@ design solutions.</p>
     </div>
 @endif
 
-          <form method="POST" action="/contact-submit">
+        <form method="POST" action="/contact-submit" id="contactForm" novalidate>
   @csrf
-
   <div class="row g-3">
     <div class="col-md-6">
-      <input type="text" name="name" class="form-control custom-input" placeholder="Your Name">
+      <input type="text" name="name" id="contactName"
+             class="form-control custom-input" placeholder="Your Name">
+      <div class="invalid-feedback-msg" id="nameError"></div>
     </div>
     <div class="col-md-6">
-      <input type="email" name="email" class="form-control custom-input" placeholder="Your Email">
+      <input type="email" name="email" id="contactEmail"
+             class="form-control custom-input" placeholder="Your Email">
+      <div class="invalid-feedback-msg" id="emailError"></div>
     </div>
     <div class="col-12">
-      <textarea name="message" class="form-control custom-input" rows="5" placeholder="Your Message"></textarea>
+      <textarea name="message" id="contactMessage"
+                class="form-control custom-input" rows="5"
+                placeholder="Your Message"></textarea>
+      <div class="invalid-feedback-msg" id="messageError"></div>
     </div>
     <div class="col-12">
-      <button type="submit" class="btn send-btn w-100">Send Message</button>
+      <button type="submit" class="btn send-btn w-100" id="submitBtn">
+        Send Message
+      </button>
     </div>
   </div>
 </form>
@@ -823,8 +941,8 @@ design solutions.</p>
       <div class="col-lg-6" data-aos="fade-up">
         <h2 class="fw-bold mb-3 mx-5">Get in Touch</h2>
         <p class="mb-4 mx-5" style="max-width:420px;">
-          Ecosystem bootstrapping learning curve lean startup disruptive.
-          Marketing long tail disruptive agile development partner.
+          Based in Chattogram, Bangladesh. Open to freelance projects
+and full-time opportunities in design.
         </p>
 
         <!-- Social Icons -->
@@ -864,12 +982,17 @@ design solutions.</p>
     <p>© 2026 Ekram Hossen. All Rights Reserved.Powered by<a href="#"><span><i class="bi bi-code-slash"></i> devwithefran</span></a> </p>
   </div>
 
+  <!-- Scroll to Top -->
+<button id="scrollTopBtn" title="Go to top">
+  <i class="bi bi-arrow-up-short"></i>
+</button>
+
 <!-- footer part ends -->
 <!-- js link here -->
 <script src="{{ asset('frontend/assets/js/bootstrap.bundle.min.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="{{ asset('frontend/assets/js/apps.js') }}"></script>   
      <!-- js link ends -->
@@ -893,6 +1016,8 @@ design solutions.</p>
 });
 </script>
 @endif
+
+
 
 </body>
 </html>

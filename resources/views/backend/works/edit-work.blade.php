@@ -12,12 +12,12 @@
             </h4>
             <p class="text-muted mb-0 small">কাজটি সম্পাদনা করো</p>
         </div>
-        <a href="{{ route('works.index') }}" class="btn btn-outline-secondary btn-sm">
+        <a href="{{ route('backend.works.index') }}" class="btn btn-outline-secondary btn-sm">
             <i class="bx bx-arrow-back me-1"></i> সব কাজে ফিরে যাও
         </a>
     </div>
 
-    <form action="{{ route('works.update', $work->id) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('backend.works.update', $work->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
 
@@ -166,7 +166,7 @@
                         <button type="submit" class="btn btn-primary btn-lg">
                             <i class="bx bx-save me-2"></i> পরিবর্তন সংরক্ষণ করো
                         </button>
-                        <a href="{{ route('works.index') }}" class="btn btn-outline-secondary">বাতিল করো</a>
+                        <a href="{{ route('backend.works.index') }}" class="btn btn-outline-secondary">বাতিল করো</a>
                     </div>
                 </div>
 

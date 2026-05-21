@@ -119,7 +119,7 @@
           <ul class="menu-inner py-1">
             <!-- Dashboard -->
            <li class="menu-item {{ request()->routeIs('dashboard') ? 'active' : '' }}">
-    <a href="{{ route('dashboard') }}" class="menu-link">
+    <a href="{{ route('backend.dashboard') }}" class="menu-link">
         <i class="menu-icon tf-icons bx bx-home-circle"></i>
         <div data-i18n="Analytics">Dashboard</div>
     </a>
@@ -134,12 +134,12 @@
 
               <ul class="menu-sub">
                 <li class="menu-item">
-  <a href="{{ route('works.create') }}" class="menu-link">
+  <a href="{{ route('backend.works.create') }}" class="menu-link">
     <div data-i18n="Without menu">Add Work</div>
   </a>
 </li>
 <li class="menu-item">
-  <a href="{{ route('works.index') }}" class="menu-link">
+  <a href="{{ route('backend.works.index') }}" class="menu-link">
     <div data-i18n="Without navbar">All Work</div>
   </a>
 </li>

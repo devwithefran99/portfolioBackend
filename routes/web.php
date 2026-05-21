@@ -8,9 +8,6 @@ use App\Http\Controllers\FrontendController;
 
 
 
-Route::get('/dashboard', [DashboardController::class, 'index'])
-     ->middleware('auth')
-     ->name('dashboard');
 
 // Frontend
 Route::get('/', [FrontendController::class, 'index']);
@@ -27,12 +24,4 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 // Contact form (public)
 Route::post('/contact-submit', [DashboardController::class, 'store']);
-Route::get('/contact-done/{id}', [DashboardController::class, 'done']);
-Route::get('/contact-delete/{id}', [DashboardController::class, 'delete']);
 
-
-// Add Work & All Work routes
-
-Route::prefix('dashboard')->middleware(['auth'])->group(function () {
-    Route::resource('works', WorkController::class);
-});

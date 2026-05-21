@@ -13,7 +13,7 @@
             </h4>
             <p class="text-muted mb-0 small">নতুন কাজ যোগ করো — এটি সরাসরি Portfolio তে দেখাবে</p>
         </div>
-        <a href="{{ route('works.index') }}" class="btn btn-outline-secondary btn-sm">
+        <a href="{{ route('backend.works.index') }}" class="btn btn-outline-secondary btn-sm">
             <i class="bx bx-list-ul me-1"></i> সব কাজ দেখো
         </a>
     </div>
@@ -26,7 +26,7 @@
         </div>
     @endif
 
-    <form action="{{ route('works.store') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('backend.works.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
 
         <div class="row g-4">
@@ -236,7 +236,7 @@
                         <button type="submit" class="btn btn-primary btn-lg">
                             <i class="bx bx-plus-circle me-2"></i> Portfolio তে যোগ করো
                         </button>
-                        <a href="{{ route('works.index') }}" class="btn btn-outline-secondary">
+                        <a href="{{ route('backend.works.index') }}" class="btn btn-outline-secondary">
                             বাতিল করো
                         </a>
                     </div>

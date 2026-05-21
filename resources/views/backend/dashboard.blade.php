@@ -38,8 +38,16 @@
                 @endif
             </td>
             <td>
-                <a href="/contact-done/{{ $item->id }}" class="btn btn-sm btn-success">Done</a>
-                <a href="/contact-delete/{{ $item->id }}" class="btn btn-sm btn-danger">Delete</a>
+              <form action="{{ route('backend.contact.done', $item->id) }}" method="POST" class="d-inline">
+    @csrf
+    <button type="submit" class="btn btn-sm btn-success">Done</button>
+</form>
+               <form action="{{ route('backend.contact.delete', $item->id) }}" method="POST" class="d-inline"
+      onsubmit="return confirm('Delete করবে?')">
+    @csrf
+    @method('DELETE')
+    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+</form>
             </td>
         </tr>
         @endforeach
@@ -67,8 +75,16 @@
                     <span class="text-success">Done</span>
                 @endif
             </p>
-            <a href="/contact-done/{{ $item->id }}" class="btn btn-sm btn-success">Done</a>
-            <a href="/contact-delete/{{ $item->id }}" class="btn btn-sm btn-danger" onclick="return confirm('Delete?')">Delete</a>
+          <form action="{{ route('backend.contact.done', $item->id) }}" method="POST" class="d-inline">
+    @csrf
+    <button type="submit" class="btn btn-sm btn-success">Done</button>
+</form>
+           <form action="{{ route('backend.contact.delete', $item->id) }}" method="POST" class="d-inline"
+      onsubmit="return confirm('Delete করবে?')">
+    @csrf
+    @method('DELETE')
+    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+</form>
         </div>
     </div>
     @endforeach
@@ -108,7 +124,6 @@
     <!-- build:js assets/vendor/js/core.js -->
       <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
@@ -162,7 +177,6 @@ document.addEventListener("DOMContentLoaded", function () {
     chart.render();
 
 });
-</script>
 </script>
 
 @endsection

@@ -13,7 +13,7 @@
             </h4>
             <p class="text-muted mb-0 small">মোট {{ $works->count() }}টি কাজ আছে</p>
         </div>
-        <a href="{{ route('works.create') }}" class="btn btn-primary">
+        <a href="{{ route('backend.works.create') }}" class="btn btn-primary">
             <i class="bx bx-plus me-1"></i> নতুন কাজ যোগ করো
         </a>
     </div>
@@ -51,7 +51,7 @@
             <div class="card-body text-center py-5">
                 <i class="bx bx-image-add text-muted" style="font-size:4rem; opacity:.4;"></i>
                 <h5 class="mt-3 text-muted">এখনো কোনো কাজ যোগ করা হয়নি</h5>
-                <a href="{{ route('works.create') }}" class="btn btn-primary mt-2">
+                <a href="{{ route('backend.works.create') }}" class="btn btn-primary mt-2">
                     <i class="bx bx-plus me-1"></i> প্রথম কাজ যোগ করো
                 </a>
             </div>
@@ -98,11 +98,11 @@
                     {{-- Actions --}}
                     <div class="card-footer bg-transparent border-0 pt-0 pb-3 px-3">
                         <div class="d-flex gap-2">
-                            <a href="{{ route('works.edit', $work->id) }}"
+                            <a href="{{ route('backend.works.edit', $work->id) }}"
                                class="btn btn-sm btn-outline-primary flex-fill">
                                 <i class="bx bx-edit me-1"></i> Edit
                             </a>
-                            <form action="{{ route('works.destroy', $work->id) }}" method="POST" class="flex-fill">
+                            <form action="{{ route('backend.works.destroy', $work->id) }}" method="POST" class="flex-fill">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit"

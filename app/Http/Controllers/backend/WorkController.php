@@ -52,7 +52,7 @@ class WorkController extends Controller
             'sort_order'  => $request->sort_order ?? 0,
         ]);
 
-        return redirect()->route('works.index')
+        return redirect()->route('backend.works.index')
                          ->with('success', '✅ নতুন কাজ সফলভাবে যোগ হয়েছে!');
     }
 
@@ -97,7 +97,7 @@ class WorkController extends Controller
 
         $work->update($data);
 
-        return redirect()->route('works.index')
+        return redirect()->route('backend.works.index')
                          ->with('success', '✏️ কাজটি সফলভাবে আপডেট হয়েছে!');
     }
 
@@ -110,7 +110,7 @@ class WorkController extends Controller
         }
         $work->delete();
 
-        return redirect()->route('works.index')
+        return redirect()->route('backend.works.index')
                          ->with('success', '🗑️ কাজটি সফলভাবে মুছে ফেলা হয়েছে!');
     }
 }

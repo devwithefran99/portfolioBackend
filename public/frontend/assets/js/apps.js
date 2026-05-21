@@ -1,3 +1,40 @@
+
+
+const scrollTopBtn = document.getElementById('scrollTopBtn');
+
+scrollTopBtn.addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+// ── Navbar: slide down after 20% scroll + active link ──
+const navbar = document.querySelector('nav.navbar');
+const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+
+// Section গুলো এবং তাদের id — তোমার সব section id এখানে আছে
+const sectionIds = ['Home', 'skills', 'services', 'workPart', 'educationPart', 'about', 'contact'];
+
+// ✅ একটা scroll listener এ সব রাখো
+window.addEventListener('scroll', () => {
+  const scrolled = window.scrollY;
+
+  // navbar
+  navbar.classList.toggle('nav-scrolled', scrolled > 80);
+
+  // scroll to top button
+  scrollTopBtn.classList.toggle('show', scrolled > 400);
+
+  // active nav link
+  let current = '';
+  sectionIds.forEach(id => {
+    const section = document.getElementById(id);
+    if (section && scrolled >= section.offsetTop - 120) {
+      current = id;
+    }
+  });
+  navLinks.forEach(link => {
+    link.classList.toggle('nav-active', link.getAttribute('href') === '#' + current);
+  });
+});
 const startTime = Date.now();
 
   window.addEventListener("load", function () {
@@ -203,19 +240,45 @@ document.querySelectorAll(".icon.love").forEach(btn=>{
   });
 });
 // work toggle ends
-// * trusted part starts
-$(document).ready(function(){
-  let track = $('.client-track');
 
-  setInterval(function(){
-    let firstItem = track.children().first();
-    firstItem.animate({marginLeft: "-220px"}, 800, function(){
-      firstItem.appendTo(track).css("margin-left","0");
-    });
-  },5000);
-});
 
 // *my work slider ends
+
+// Services accordion — 2nd item default open
+const srvItems = document.querySelectorAll('.srv-item');
+
+if (srvItems.length >= 2) {
+  srvItems[1].classList.add('srv-active');
+}
+
+const isTouchDevice = () => window.matchMedia('(max-width: 768px)').matches;
+
+srvItems.forEach(item => {
+  // Desktop — hover
+  item.addEventListener('mouseenter', () => {
+    if (isTouchDevice()) return;
+    srvItems.forEach(i => i.classList.remove('srv-active'));
+    item.classList.add('srv-active');
+  });
+
+  item.addEventListener('mouseleave', () => {
+    if (isTouchDevice()) return;
+    srvItems.forEach(i => i.classList.remove('srv-active'));
+    srvItems[1].classList.add('srv-active');
+  });
+
+  // Mobile — click/tap
+  item.addEventListener('click', () => {
+    if (!isTouchDevice()) return;
+    const isAlreadyActive = item.classList.contains('srv-active');
+    srvItems.forEach(i => i.classList.remove('srv-active'));
+    if (!isAlreadyActive) {
+      item.classList.add('srv-active');
+    } else {
+      srvItems[1].classList.add('srv-active'); // close করলে ২ নম্বর default
+    }
+  });
+});
 
 // image-models starts
 const cards = document.querySelectorAll(".popup-trigger");
@@ -260,60 +323,84 @@ document.addEventListener("keydown", (e) => {
 });
   // image-model ends
  
-  $(document).ready(function () {
-    let index = 0;
-    const slides = $('.feedback-item');
-    const dots = $('.dot');
+ $(document).ready(function () {
 
-    slides.hide().eq(0).show(); // first slide visible
+  // trusted part
+  let track = $('.client-track');
+  setInterval(function(){
+    let firstItem = track.children().first();
+    firstItem.animate({marginLeft: "-220px"}, 800, function(){
+      firstItem.appendTo(track).css("margin-left","0");
+    });
+  }, 5000);
 
-    setInterval(function () {
-      let current = slides.eq(index);
+  // feedback slider
+  let index = 0;
+  const slides = $('.feedback-item');
+  const dots = $('.dot');
+  slides.hide().eq(0).show();
 
-      // fade out + move right
-      current.animate(
-        {
-          opacity: 0,
-          marginRight: '40px'
-        },
-        600,
-        function () {
-          current.hide().css({
-            opacity: 1,
-            marginRight: '0'
-          });
+  setInterval(function () {
+    let current = slides.eq(index);
+    current.animate({ opacity: 0, marginRight: '40px' }, 600, function () {
+      current.hide().css({ opacity: 1, marginRight: '0' });
+      dots.eq(index).removeClass('active');
+      index = (index + 1) % slides.length;
+      let next = slides.eq(index);
+      next.css({ display: 'block', opacity: 0, marginRight: '-60px' });
+      next.animate({ opacity: 1, marginRight: '0' }, 600);
+      dots.eq(index).addClass('active');
+    });
+  }, 2000);
 
-          dots.eq(index).removeClass('active');
+});
 
-          index = (index + 1) % slides.length;
+  // Contact form validation
+const contactForm = document.getElementById('contactForm');
+if (contactForm) {
+  contactForm.addEventListener('submit', function (e) {
+    let valid = true;
 
-          let next = slides.eq(index);
+    const name    = document.getElementById('contactName');
+    const email   = document.getElementById('contactEmail');
+    const message = document.getElementById('contactMessage');
 
-          // start from left
-          next.css({
-            display: 'block',
-            opacity: 0,
-            marginRight: '-60px'
-          });
+    // Name check
+    if (name.value.trim().length < 2) {
+      document.getElementById('nameError').textContent = '⚠ নাম কমপক্ষে ২ অক্ষর হতে হবে';
+      name.classList.add('input-error'); name.classList.remove('input-ok');
+      valid = false;
+    } else {
+      document.getElementById('nameError').textContent = '';
+      name.classList.remove('input-error'); name.classList.add('input-ok');
+    }
 
-          // fade in + move to center
-          next.animate(
-            {
-              opacity: 1,
-              marginRight: '0'
-            },
-            600
-          );
+    // Email check
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email.value.trim())) {
+      document.getElementById('emailError').textContent = 'Please enter a valid email';
+      email.classList.add('input-error'); email.classList.remove('input-ok');
+      valid = false;
+    } else {
+      document.getElementById('emailError').textContent = '';
+      email.classList.remove('input-error'); email.classList.add('input-ok');
+    }
 
-          dots.eq(index).addClass('active');
-        }
-      );
-    }, 2000);
+    // Message check
+    if (message.value.trim().length < 10) {
+      document.getElementById('messageError').textContent = 'Message must be at least 10 characters long.';
+      message.classList.add('input-error'); message.classList.remove('input-ok');
+      valid = false;
+    } else {
+      document.getElementById('messageError').textContent = '';
+      message.classList.remove('input-error'); message.classList.add('input-ok');
+    }
+
+    if (!valid) e.preventDefault();
   });
+}
 
 
- 
-  
 
 
    AOS.init();
