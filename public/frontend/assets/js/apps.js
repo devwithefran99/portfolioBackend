@@ -351,7 +351,7 @@ document.addEventListener("keydown", (e) => {
       next.animate({ opacity: 1, marginRight: '0' }, 600);
       dots.eq(index).addClass('active');
     });
-  }, 2000);
+  }, 4000);
 
 });
 

@@ -116,38 +116,69 @@
 
           <div class="menu-inner-shadow"></div>
 
-          <ul class="menu-inner py-1">
-            <!-- Dashboard -->
-           <li class="menu-item {{ request()->routeIs('dashboard') ? 'active' : '' }}">
-    <a href="{{ route('backend.dashboard') }}" class="menu-link">
-        <i class="menu-icon tf-icons bx bx-home-circle"></i>
-        <div data-i18n="Analytics">Dashboard</div>
-    </a>
-</li>
+         <ul class="menu-inner py-1">
 
-            <!-- Layouts -->
-             <li class="menu-item">
-              <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-layout"></i>
-                <div data-i18n="Layouts">Your Work</div>
-              </a>
+    {{-- Dashboard --}}
+    <li class="menu-item {{ request()->routeIs('dashboard') ? 'active' : '' }}">
+        <a href="{{ route('backend.dashboard') }}" class="menu-link">
+            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+            <div>Dashboard</div>
+        </a>
+    </li>
 
-              <ul class="menu-sub">
-                <li class="menu-item">
-  <a href="{{ route('backend.works.create') }}" class="menu-link">
-    <div data-i18n="Without menu">Add Work</div>
-  </a>
-</li>
-<li class="menu-item">
-  <a href="{{ route('backend.works.index') }}" class="menu-link">
-    <div data-i18n="Without navbar">All Work</div>
-  </a>
-</li>
-                
-              </ul>
+    {{-- Your Work --}}
+    <li class="menu-item {{ request()->routeIs('works.*') ? 'active open' : '' }}">
+        <a href="javascript:void(0);" class="menu-link menu-toggle">
+            <i class="menu-icon tf-icons bx bx-layout"></i>
+            <div>Your Work</div>
+        </a>
+        <ul class="menu-sub">
+            <li class="menu-item {{ request()->routeIs('works.create') ? 'active' : '' }}">
+                <a href="{{ route('backend.works.create') }}" class="menu-link">
+                    <div>Add Work</div>
+                </a>
             </li>
+            <li class="menu-item {{ request()->routeIs('works.index') ? 'active' : '' }}">
+                <a href="{{ route('backend.works.index') }}" class="menu-link">
+                    <div>All Works</div>
+                </a>
+            </li>
+        </ul>
+    </li>
 
-          </ul>
+    {{-- Contact Messages --}}
+    <li class="menu-item {{ request()->routeIs('contacts.index') ? 'active' : '' }}">
+        <a href="{{ route('backend.contacts.index') }}" class="menu-link">
+            <i class="menu-icon tf-icons bx bx-envelope"></i>
+            <div>Messages</div>
+        </a>
+    </li>
+
+    {{-- Analytics --}}
+    <li class="menu-item {{ request()->routeIs('analytics.index') ? 'active' : '' }}">
+        <a href="{{ route('backend.analytics.index') }}" class="menu-link">
+            <i class="menu-icon tf-icons bx bx-bar-chart-alt-2"></i>
+            <div>Analytics</div>
+        </a>
+    </li>
+
+    {{-- Testimonials --}}
+    <li class="menu-item {{ request()->routeIs('testimonials.*') ? 'active' : '' }}">
+        <a href="{{ route('backend.testimonials.index') }}" class="menu-link">
+            <i class="menu-icon tf-icons bx bx-star"></i>
+            <div>Testimonials</div>
+        </a>
+    </li>
+
+    {{-- Profile Settings --}}
+    <li class="menu-item {{ request()->routeIs('profile.index') ? 'active' : '' }}">
+        <a href="{{ route('backend.profile.index') }}" class="menu-link">
+            <i class="menu-icon tf-icons bx bx-user-circle"></i>
+            <div>Profile Settings</div>
+        </a>
+    </li>
+
+</ul>
         </aside>
         <!-- / Menu -->
 

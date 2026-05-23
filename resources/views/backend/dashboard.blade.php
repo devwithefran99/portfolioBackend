@@ -1,182 +1,198 @@
-
-@extends('backend.layouts.app')   {{-- jodi layouts folder na banai tahole @extends('backend.app') --}}
-
+@extends('backend.layouts.app')
 @section('title', 'Dashboard - Myfolio')
 
 @section('content')
+<div class="container-xxl flex-grow-1 container-p-y">
 
+    {{-- ── Greeting ── --}}
+    <div class="d-flex align-items-center justify-content-between mb-4">
+        <div>
+            <h4 class="fw-bold mb-1">Dashboard</h4>
+            <p class="text-muted mb-0">Welcome back! Here's your portfolio summary.</p>
+        </div>
+        <a href="{{ url('/') }}" target="_blank" class="btn btn-outline-primary btn-sm">
+            <i class="bx bx-link-external me-1"></i> View Site
+        </a>
+    </div>
 
+    {{-- ── Stats Cards ── --}}
+    <div class="row g-3 mb-4">
 
+        <div class="col-6 col-md-3">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-2">
+                        <div class="avatar flex-shrink-0 me-3">
+                            <span class="avatar-initial rounded bg-label-primary">
+                                <i class="bx bx-image"></i>
+                            </span>
+                        </div>
+                        <span class="text-muted small">Total Works</span>
+                    </div>
+                    <h3 class="mb-0 fw-bold">{{ $totalWorks }}</h3>
+                </div>
+            </div>
+        </div>
 
-      <!-- contact part -->
-   <div class="dashHeading mx-auto mt-3">
-    <h3>Contact Messages</h3>
-</div>
+        <div class="col-6 col-md-3">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-2">
+                        <div class="avatar flex-shrink-0 me-3">
+                            <span class="avatar-initial rounded bg-label-success">
+                                <i class="bx bx-show"></i>
+                            </span>
+                        </div>
+                        <span class="text-muted small">Total Visitors</span>
+                    </div>
+                    <h3 class="mb-0 fw-bold">{{ number_format($totalVisitors) }}</h3>
+                </div>
+            </div>
+        </div>
 
-{{-- Desktop Table --}}
-<div class="d-none d-md-block">
-    <table class="table table-bordered">
-        <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Message</th>
-            <th>Status</th>
-            <th>Action</th>
-        </tr>
+        <div class="col-6 col-md-3">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-2">
+                        <div class="avatar flex-shrink-0 me-3">
+                            <span class="avatar-initial rounded bg-label-warning">
+                                <i class="bx bx-envelope"></i>
+                            </span>
+                        </div>
+                        <span class="text-muted small">Total Messages</span>
+                    </div>
+                    <h3 class="mb-0 fw-bold">{{ $totalContacts }}</h3>
+                </div>
+            </div>
+        </div>
 
-        <tbody>
-        @foreach($contacts as $index => $item)
-        <tr class="{{ $index >= 6 ? 'd-none extra-row' : '' }}">
-            <td>{{ $item->name }}</td>
-            <td>{{ $item->email }}</td>
-            <td>{{ $item->message }}</td>
-            <td>
-                @if($item->status == 'pending')
-                    <span class="text-danger">Pending</span>
-                @else
-                    <span class="text-success">Done</span>
-                @endif
-            </td>
-            <td>
-              <form action="{{ route('backend.contact.done', $item->id) }}" method="POST" class="d-inline">
-    @csrf
-    <button type="submit" class="btn btn-sm btn-success">Done</button>
-</form>
-               <form action="{{ route('backend.contact.delete', $item->id) }}" method="POST" class="d-inline"
-      onsubmit="return confirm('Delete করবে?')">
-    @csrf
-    @method('DELETE')
-    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-</form>
-            </td>
-        </tr>
-        @endforeach
-        </tbody>
-    </table>
-</div>
+        <div class="col-6 col-md-3">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-2">
+                        <div class="avatar flex-shrink-0 me-3">
+                            <span class="avatar-initial rounded bg-label-danger">
+                                <i class="bx bx-time-five"></i>
+                            </span>
+                        </div>
+                        <span class="text-muted small">Pending Messages</span>
+                    </div>
+                    <h3 class="mb-0 fw-bold">{{ $pendingContacts }}</h3>
+                </div>
+            </div>
+        </div>
 
-{{-- Mobile Cards --}}
-<div class="d-md-none">
-   @foreach($contacts as $index => $item)
-<div class="card mb-3 {{ $index >= 6 ? 'd-none extra-row' : '' }}">
-        <div class="card-body">
-            <h6 class="card-title fw-bold">{{ $item->name }}</h6>
-            <p class="card-text mb-1">
-                <small class="text-muted">Email:</small> {{ $item->email }}
-            </p>
-            <p class="card-text mb-1">
-                <small class="text-muted">Message:</small> {{ $item->message }}
-            </p>
-            <p class="card-text mb-2">
-                <small class="text-muted">Status:</small>
-                @if($item->status == 'pending')
-                    <span class="text-danger">Pending</span>
-                @else
-                    <span class="text-success">Done</span>
-                @endif
-            </p>
-          <form action="{{ route('backend.contact.done', $item->id) }}" method="POST" class="d-inline">
-    @csrf
-    <button type="submit" class="btn btn-sm btn-success">Done</button>
-</form>
-           <form action="{{ route('backend.contact.delete', $item->id) }}" method="POST" class="d-inline"
-      onsubmit="return confirm('Delete করবে?')">
-    @csrf
-    @method('DELETE')
-    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-</form>
+    </div>
+
+    {{-- ── Recent Works + Recent Messages ── --}}
+    <div class="row g-3 mb-4">
+
+        {{-- Recent Works --}}
+        <div class="col-md-6">
+            <div class="card h-100">
+                <div class="card-header d-flex align-items-center justify-content-between">
+                    <h6 class="mb-0">Recent Works</h6>
+                    <a href="{{ route('backend.works.index') }}" class="btn btn-sm btn-outline-primary">View All</a>
+                </div>
+                <div class="card-body p-0">
+                    @forelse($recentWorks as $work)
+                    <div class="d-flex align-items-center px-3 py-2 border-bottom">
+                        <img src="{{ asset('storage/' . $work->cover_image) }}"
+                             class="rounded me-3" style="width:44px;height:36px;object-fit:cover;" alt="">
+                        <div class="flex-grow-1">
+                            <p class="mb-0 fw-semibold small">{{ $work->title }}</p>
+                            <small class="text-muted">{{ ucfirst($work->category) }}</small>
+                        </div>
+                        <a href="{{ route('backend.works.edit', $work->id) }}" class="btn btn-sm btn-icon btn-outline-secondary">
+                            <i class="bx bx-edit-alt"></i>
+                        </a>
+                    </div>
+                    @empty
+                    <p class="text-muted text-center py-4">No works added yet.</p>
+                    @endforelse
+                </div>
+                <div class="card-footer text-center">
+                    <a href="{{ route('backend.works.create') }}" class="btn btn-sm btn-primary">
+                        <i class="bx bx-plus me-1"></i> Add New Work
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        {{-- Recent Messages --}}
+        <div class="col-md-6">
+            <div class="card h-100">
+                <div class="card-header d-flex align-items-center justify-content-between">
+                    <h6 class="mb-0">
+                        Recent Messages
+                        @if($pendingContacts > 0)
+                            <span class="badge bg-danger ms-1">{{ $pendingContacts }}</span>
+                        @endif
+                    </h6>
+                    <a href="{{ route('backend.contacts.index') }}" class="btn btn-sm btn-outline-primary">View All</a>
+                </div>
+                <div class="card-body p-0">
+                    @forelse($recentContacts as $item)
+                    <div class="d-flex align-items-start px-3 py-2 border-bottom">
+                        <div class="avatar me-3 flex-shrink-0">
+                            <span class="avatar-initial rounded-circle bg-label-info">
+                                {{ strtoupper(substr($item->name, 0, 1)) }}
+                            </span>
+                        </div>
+                        <div class="flex-grow-1" style="min-width:0">
+                            <p class="mb-0 fw-semibold small">{{ $item->name }}</p>
+                            <small class="text-muted d-block text-truncate">{{ $item->message }}</small>
+                        </div>
+                        <span class="badge ms-2 flex-shrink-0 {{ $item->status === 'pending' ? 'bg-label-danger' : 'bg-label-success' }}">
+                            {{ ucfirst($item->status) }}
+                        </span>
+                    </div>
+                    @empty
+                    <p class="text-muted text-center py-4">No messages yet.</p>
+                    @endforelse
+                </div>
+                <div class="card-footer text-center">
+                    <a href="{{ route('backend.contacts.index') }}" class="btn btn-sm btn-outline-secondary">
+                        Manage All Messages
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    {{-- ── Quick Actions ── --}}
+    <div class="row g-3">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header"><h6 class="mb-0">Quick Actions</h6></div>
+                <div class="card-body">
+                    <div class="row g-2">
+                        <div class="col-6 col-md-3">
+                            <a href="{{ route('backend.works.create') }}" class="btn btn-outline-primary w-100">
+                                <i class="bx bx-plus me-1"></i> Add Work
+                            </a>
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <a href="{{ route('backend.works.index') }}" class="btn btn-outline-secondary w-100">
+                                <i class="bx bx-collection me-1"></i> All Works
+                            </a>
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <a href="{{ route('backend.contacts.index') }}" class="btn btn-outline-warning w-100">
+                                <i class="bx bx-envelope me-1"></i> Messages
+                            </a>
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <a href="{{ route('backend.analytics.index') }}" class="btn btn-outline-success w-100">
+                                <i class="bx bx-bar-chart-alt-2 me-1"></i> Analytics
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    @endforeach
+
 </div>
-{{-- ✅ BUTTON ekhane dite hobe (sobar niche) --}}
-@if(count($contacts) > 6)
-<div class="text-center mt-3">
-    <button id="toggleBtn" class="btn btn-primary">View More</button>
-</div>
-@endif
-<script>
-    let expanded = false;
-
-    document.getElementById("toggleBtn").addEventListener("click", function () {
-        let extraRows = document.querySelectorAll(".extra-row");
-
-        extraRows.forEach(row => {
-            row.classList.toggle("d-none");
-        });
-
-        expanded = !expanded;
-        this.innerText = expanded ? "View Less" : "View More";
-    });
-</script>
-      <!-- contact ends here -->
-
-      <!-- visitor part -->
-     <div class="card p-3 mx-4 shadow-lg mt-3">
-    <h5 class="text-center">👀 Monthly Visitors</h5>
-
-    <div id="chart" style="width:100%;"></div>
-     </div>
-      <!-- visitor part ends -->
-            
-
-    <!-- Core JS -->
-    <!-- build:js assets/vendor/js/core.js -->
-      <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-
-
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-
-    var options = {
-        chart: {
-            type: 'area',
-            height: 350,
-            toolbar: { show: false }
-        },
-        series: [{
-            name: 'Visitors',
-            data: {!! json_encode(array_values($monthlyVisitors)) !!}
-        }],
-        xaxis: {
-            categories: {!! json_encode(array_keys($monthlyVisitors)) !!}
-        },
-        stroke: {
-            curve: 'smooth'
-        },
-        fill: {
-            type: 'gradient',
-            gradient: {
-                opacityFrom: 0.7,
-                opacityTo: 0.1
-            }
-        },
-
-        // ✅ RESPONSIVE PART
-        responsive: [
-            {
-                breakpoint: 768,
-                options: {
-                    chart: {
-                        height: 250
-                    }
-                }
-            },
-            {
-                breakpoint: 480,
-                options: {
-                    chart: {
-                        height: 200
-                    }
-                }
-            }
-        ]
-    };
-
-    var chart = new ApexCharts(document.querySelector("#chart"), options);
-    chart.render();
-
-});
-</script>
-
 @endsection
