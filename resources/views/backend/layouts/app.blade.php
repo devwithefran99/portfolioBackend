@@ -6,7 +6,7 @@
   data-theme="theme-default"
   data-assets-path="../assets/"
   data-template="vertical-menu-template-free"
->
+>    
   <head>
     <meta charset="utf-8" />
     <meta
@@ -178,6 +178,14 @@
         </a>
     </li>
 
+    {{-- Services --}}
+    <li class="menu-item {{ request()->routeIs('services.*') ? 'active' : '' }}">
+        <a href="{{ route('backend.services.index') }}" class="menu-link">
+            <i class="menu-icon tf-icons bx bx-briefcase"></i>
+            <div>Services</div>
+        </a>
+    </li>
+
 </ul>
         </aside>
         <!-- / Menu -->
@@ -279,7 +287,7 @@
 
           <!-- / Navbar -->
 
-@yield('content')
+@yield('content')    
 
 
     <script src="{{asset('backend/assets/vendor/libs/jquery/jquery.js')}}"></script>

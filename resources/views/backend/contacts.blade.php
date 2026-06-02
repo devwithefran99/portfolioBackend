@@ -63,20 +63,66 @@
                             @if($item->status === 'pending')
                             <form action="{{ route('backend.contact.done', $item->id) }}" method="POST">
                                 @csrf
-                                <button class="btn btn-sm btn-success">
+                                <button class="btn btn-sm btn-success" title="Mark as Done">
                                     <i class="bx bx-check"></i>
                                 </button>
                             </form>
                             @endif
+
+                            {{-- Reply Button --}}
+                            <button class="btn btn-sm btn-info" title="Reply"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#replyModal{{ $item->id }}">
+                                <i class="bx bx-reply"></i>
+                            </button>
+
                             <form action="{{ route('backend.contact.delete', $item->id) }}" method="POST"
                                   onsubmit="return confirm('Delete this message?')">
                                 @csrf
                                 @method('DELETE')
-                                <button class="btn btn-sm btn-danger">
+                                <button class="btn btn-sm btn-danger" title="Delete">
                                     <i class="bx bx-trash"></i>
                                 </button>
                             </form>
                         </div>
+
+                        {{-- Reply Modal --}}
+                        <div class="modal fade" id="replyModal{{ $item->id }}" tabindex="-1">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <form action="{{ route('backend.contact.reply', $item->id) }}" method="POST">
+                                        @csrf
+                                        <div class="modal-header">
+                                            <h6 class="modal-title">
+                                                <i class="bx bx-reply me-1"></i> Reply to {{ $item->name }}
+                                            </h6>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="bg-light rounded p-3 mb-3">
+                                                <p class="small mb-1">
+                                                    <strong>To:</strong> {{ $item->email }}
+                                                </p>
+                                                <p class="small mb-0">
+                                                    <strong>Their message:</strong> {{ Str::limit($item->message, 120) }}
+                                                </p>
+                                            </div>
+                                            <label class="form-label fw-semibold small">Your Reply</label>
+                                            <textarea name="reply_message" rows="5" class="form-control"
+                                                      placeholder="Reply লেখো..." required minlength="10"></textarea>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-outline-secondary btn-sm"
+                                                    data-bs-dismiss="modal">Cancel</button>
+                                            <button type="submit" class="btn btn-primary btn-sm">
+                                                <i class="bx bx-send me-1"></i> Send Reply
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
                     </td>
                 </tr>
                 @empty
@@ -94,6 +140,7 @@
         @forelse($contacts as $item)
         <div class="card mb-3">
             <div class="card-body">
+
                 <div class="d-flex justify-content-between align-items-start mb-2">
                     <h6 class="fw-bold mb-0">{{ $item->name }}</h6>
                     @if($item->status === 'pending')
@@ -102,9 +149,11 @@
                         <span class="badge bg-label-success">Done</span>
                     @endif
                 </div>
+
                 <p class="mb-1 small text-muted">{{ $item->email }}</p>
                 <p class="mb-2 small">{{ $item->message }}</p>
                 <p class="mb-3 small text-muted">{{ $item->created_at->format('d M Y') }}</p>
+
                 <div class="d-flex gap-2">
                     @if($item->status === 'pending')
                     <form action="{{ route('backend.contact.done', $item->id) }}" method="POST">
@@ -114,6 +163,14 @@
                         </button>
                     </form>
                     @endif
+
+                    {{-- Reply Button --}}
+                    <button class="btn btn-sm btn-info"
+                            data-bs-toggle="modal"
+                            data-bs-target="#replyModalMob{{ $item->id }}">
+                        <i class="bx bx-reply me-1"></i> Reply
+                    </button>
+
                     <form action="{{ route('backend.contact.delete', $item->id) }}" method="POST"
                           onsubmit="return confirm('Delete?')">
                         @csrf
@@ -123,6 +180,44 @@
                         </button>
                     </form>
                 </div>
+
+                {{-- Mobile Reply Modal --}}
+                <div class="modal fade" id="replyModalMob{{ $item->id }}" tabindex="-1">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <form action="{{ route('backend.contact.reply', $item->id) }}" method="POST">
+                                @csrf
+                                <div class="modal-header">
+                                    <h6 class="modal-title">
+                                        <i class="bx bx-reply me-1"></i> Reply to {{ $item->name }}
+                                    </h6>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="bg-light rounded p-3 mb-3">
+                                        <p class="small mb-1">
+                                            <strong>To:</strong> {{ $item->email }}
+                                        </p>
+                                        <p class="small mb-0">
+                                            <strong>Their message:</strong> {{ Str::limit($item->message, 120) }}
+                                        </p>
+                                    </div>
+                                    <label class="form-label fw-semibold small">Your Reply</label>
+                                    <textarea name="reply_message" rows="5" class="form-control"
+                                              placeholder="Reply লেখো..." required minlength="10"></textarea>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-outline-secondary btn-sm"
+                                            data-bs-dismiss="modal">Cancel</button>
+                                    <button type="submit" class="btn btn-primary btn-sm">
+                                        <i class="bx bx-send me-1"></i> Send Reply
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
         @empty

@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Backend\WorkController;
 use App\Http\Controllers\Backend\TestimonialController;
 use App\Http\Controllers\Backend\ProfileController;
+use App\Http\Controllers\Backend\ServiceController;
 
 // ── Auth ───────────────────────────────────────────────────────
 Route::get('/login',  [LoginController::class, 'showLoginForm'])->name('login');
@@ -35,6 +36,14 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::prefix('dashboard')->group(function () {
         Route::resource('testimonials', TestimonialController::class);
     });
+
+    // Services CRUD
+     Route::prefix('dashboard')->group(function () {
+     Route::resource('services', ServiceController::class);
+     });
+
+    //  mail rply
+     Route::post('/dashboard/contacts/reply/{id}', [DashboardController::class, 'reply'])->name('contact.reply');
 
     // Profile & Skills
     Route::get('/dashboard/profile', [ProfileController::class, 'index'])->name('profile.index');

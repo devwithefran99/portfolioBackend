@@ -24,6 +24,9 @@ return Application::configure(basePath: dirname(__DIR__))
             'admin' => \App\Http\Middleware\AdminMiddleware::class,
         ]);
 
+        // auth middleware কে বলো login route কোনটা
+        $middleware->redirectGuestsTo(fn () => route('backend.login'));
+
         // visitor tracking middleware
         $middleware->append(TrackVisitor::class);
     })

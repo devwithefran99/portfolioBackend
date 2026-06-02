@@ -244,68 +244,26 @@ design solutions.</p>
     </div>
 
     <div class="services-list">
-
-      <!-- 01 -->
-      <div class="srv-item">
+    @forelse($services as $i => $srv)
+    <div class="srv-item">
         <div class="srv-top">
-          <span class="srv-num">01</span>
-          <h3 class="srv-title">Brand Identity</h3>
-          <div class="srv-tags">
-            <span>Logo Design</span><span>Color Palette</span><span>Typography</span>
-          </div>
+            <span class="srv-num">{{ str_pad($i + 1, 2, '0', STR_PAD_LEFT) }}</span>
+            <h3 class="srv-title">{{ $srv->title }}</h3>
+            <div class="srv-tags">
+                @foreach($srv->tags_array as $tag)
+                    <span>{{ $tag }}</span>
+                @endforeach
+            </div>
         </div>
         <div class="srv-expand">
-          <p>Complete branding solution — from concept to final delivery. I craft logos and visual identities that make your business instantly recognizable.</p>
-          <a href="#contact" class="srv-btn">Discuss Project</a>
+            <p>{{ $srv->description }}</p>
+            <a href="#contact" class="srv-btn">Discuss Project</a>
         </div>
-      </div>
-
-      <!-- 02 -->
-      <div class="srv-item">
-        <div class="srv-top">
-          <span class="srv-num">02</span>
-          <h3 class="srv-title">Social Media Design</h3>
-          <div class="srv-tags">
-            <span>Posts</span><span>Stories</span><span>Banners</span>
-          </div>
-        </div>
-        <div class="srv-expand">
-          <p>Eye-catching social media visuals that boost engagement. Consistent design across all platforms to build a strong online presence.</p>
-          <a href="#contact" class="srv-btn">Discuss Project</a>
-        </div>
-      </div>
-
-      <!-- 03 -->
-      <div class="srv-item">
-        <div class="srv-top">
-          <span class="srv-num">03</span>
-          <h3 class="srv-title">UI/UX Design</h3>
-          <div class="srv-tags">
-            <span>Figma</span><span>Wireframe</span><span>Prototype</span>
-          </div>
-        </div>
-        <div class="srv-expand">
-          <p>Clean, modern interfaces for web & mobile apps. User-centered design that balances aesthetics with usability.</p>
-          <a href="#contact" class="srv-btn">Discuss Project</a>
-        </div>
-      </div>
-
-      <!-- 04 -->
-      <div class="srv-item">
-        <div class="srv-top">
-          <span class="srv-num">04</span>
-          <h3 class="srv-title">Print Design</h3>
-          <div class="srv-tags">
-            <span>Business Card</span><span>Brochure</span><span>Flyer</span>
-          </div>
-        </div>
-        <div class="srv-expand">
-          <p>Print-ready designs that leave a lasting impression. From business cards to large format banners — pixel perfect every time.</p>
-          <a href="#contact" class="srv-btn">Discuss Project</a>
-        </div>
-      </div>
-
     </div>
+    @empty
+    <p class="text-muted text-center py-4">No services added yet.</p>
+    @endforelse
+</div>
   </div>
 </section>
 {{-- servide ended --}}

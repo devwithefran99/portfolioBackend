@@ -6,6 +6,8 @@ use App\Models\Contact;
 use App\Models\Visitor;
 use App\Models\Work;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ContactReply;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -87,4 +89,23 @@ class DashboardController extends Controller
             'monthlyVisitors'
         ));
     }
+
+    // ── Reply to contact ───────────────────────────────────────────
+public function reply(Request $request, $id)
+{
+    $request->validate([
+        'reply_message' => 'required|string|min:10',
+    ]);
+
+    $contact = Contact::findOrFail($id);
+
+    Mail::to($contact->email)->send(
+        new ContactReply($contact->name, $request->reply_message)
+    );
+
+    // Auto mark as done after reply
+    $contact->update(['status' => 'done']);
+
+    return back()->with('success', '✅ Reply পাঠানো হয়েছে এবং message done হয়েছে!');
+}
 }
