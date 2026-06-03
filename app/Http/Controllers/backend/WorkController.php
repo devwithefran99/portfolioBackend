@@ -10,11 +10,16 @@ use Illuminate\Support\Facades\Storage;
 class WorkController extends Controller
 {
     /* ─── All Works List ─────────────────────────────────────── */
-    public function index()
-    {
-        $works = Work::orderBy('sort_order')->orderBy('created_at', 'desc')->get();
-        return view('backend.works.all-works', compact('works'));
-    }
+   public function index()
+{
+    $works      = Work::orderBy('sort_order')->orderBy('created_at', 'desc')->paginate(15);
+    $totalWorks = Work::count();
+    $catCounts  = Work::selectRaw('category, count(*) as total')
+                      ->groupBy('category')
+                      ->pluck('total', 'category');
+
+    return view('backend.works.all-works', compact('works', 'totalWorks', 'catCounts'));
+}
 
     /* ─── Add Work Form ──────────────────────────────────────── */
     public function create()

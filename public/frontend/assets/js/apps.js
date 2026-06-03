@@ -325,14 +325,40 @@ document.addEventListener("keydown", (e) => {
  
  $(document).ready(function () {
 
-  // trusted part
-  let track = $('.client-track');
-  setInterval(function(){
-    let firstItem = track.children().first();
-    firstItem.animate({marginLeft: "-220px"}, 800, function(){
-      firstItem.appendTo(track).css("margin-left","0");
-    });
-  }, 5000);
+  // Trusted By — smooth infinite scroll
+(function () {
+  const track = document.querySelector('.client-track');
+  if (!track) return;
+
+  // সব item clone করে দুইবার বানাও
+  const items = Array.from(track.children);
+  items.forEach(item => {
+    track.appendChild(item.cloneNode(true));
+  });
+  items.forEach(item => {
+    track.appendChild(item.cloneNode(true));
+  });
+
+  let position = 0;
+  const speed = 0.5;
+
+  function slide() {
+    position -= speed;
+
+    const firstItem = track.children[0];
+    const itemWidth = firstItem.getBoundingClientRect().width + 16;
+
+    if (Math.abs(position) >= itemWidth) {
+      position += itemWidth;
+      track.appendChild(firstItem);
+    }
+
+    track.style.transform = `translateX(${position}px)`;
+    requestAnimationFrame(slide);
+  }
+
+  requestAnimationFrame(slide);
+})();
 
   // feedback slider
   let index = 0;

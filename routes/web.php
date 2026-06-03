@@ -8,4 +8,5 @@ use App\Http\Controllers\DashboardController;
 Route::get('/', [FrontendController::class, 'index']);
 
 // ── Public contact submit (frontend form) ──────────────────────
-Route::post('/contact-submit', [DashboardController::class, 'store']);
+Route::post('/contact-submit', [DashboardController::class, 'store'])
+    ->middleware('throttle:3,1');

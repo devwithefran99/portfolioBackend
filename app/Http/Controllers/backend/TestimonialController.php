@@ -10,11 +10,13 @@ use Illuminate\Support\Facades\Storage;
 class TestimonialController extends Controller
 {
     // ── All list ──────────────────────────────────────────────
-    public function index()
-    {
-        $testimonials = Testimonial::orderBy('sort_order')->orderBy('created_at', 'desc')->get();
-        return view('backend.testimonials.index', compact('testimonials'));
-    }
+ public function index()
+{
+    $testimonials = Testimonial::orderBy('sort_order')
+                               ->orderBy('created_at', 'desc')
+                               ->paginate(15);
+    return view('backend.testimonials.index', compact('testimonials'));
+}
 
     // ── Add form ──────────────────────────────────────────────
     public function create()

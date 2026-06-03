@@ -100,5 +100,11 @@
         </div>
     @endif
 
+    {{-- Pagination --}}
+@if($testimonials->hasPages())
+    <div class="d-flex justify-content-center mt-4">
+        {{ $testimonials->links() }}
+    </div>
+@endif
 </div>
 @endsection

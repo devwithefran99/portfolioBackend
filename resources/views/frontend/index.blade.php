@@ -58,14 +58,14 @@
          <section id="Home">
            <nav class="navbar navbar-expand-lg">
   <div class="container">
-    <a class="navbar-brand" href="#offcanvasExample"><img class="img-fluid" src="{{asset ('frontend/assets/images/ekram logo.png ')}}" alt=""></a>
+    <a class="navbar-brand" href="#offcanvasExample"><img class="img-fluid" src="{{asset ('frontend/assets/images/ekram logo.png ')}}" alt="Ekram Hossen — Graphic & UI Designer Logo"></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <a role="button" aria-controls="offcanvasExample" href="#offcanvasExample" data-bs-toggle="offcanvas"><i class="bi bi-list"></i></a>
     </button>
     <!-- side bar starts -->
      <div class="offcanvas offcanvas-start d-lg-none" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
   <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="offcanvasExampleLabel"><img class="img-fluid" src="{{asset ('frontend/assets/images/ekram logo.png ')}}" alt=""></h5>
+    <h5 class="offcanvas-title" id="offcanvasExampleLabel"><img class="img-fluid" src="{{asset ('frontend/assets/images/ekram logo.png ')}}" alt="Ekram Hossen — Graphic & UI Designer Logo"></h5>
     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
  <ul class="navbar-nav">
@@ -131,7 +131,7 @@
   <!-- navBottom starts here -->
 <nav class="mobile-bottom-nav">
 
-  <a class="mob-nav-link" href="{{ $profile->fiverr ?? '#' }}" target="_blank">...</a>
+  <a class="mob-nav-link" href="{{ $profile->fiverr ?? '#' }}" target="_blank">... </a>
 <a class="mob-nav-link" href="https://wa.me/{{ $profile->whatsapp ?? '' }}" target="_blank">...</a>
 <a class="mob-nav-link" href="{{ $profile->facebook ?? '#' }}" target="_blank">...</a>
 <a class="mob-nav-link" href="{{ $profile->behance ?? '#' }}" target="_blank">...</a>
@@ -150,7 +150,7 @@
         <!-- Left image -->
         <div class="col-lg-4 col-12">
           <div class="hero-img mt-5">
-            <img src="{{asset ('frontend/assets/images/my-image-2.png') }}" alt="Profile" class="img-fluid">
+            <img src="{{asset ('frontend/assets/images/my-image-2.png') }}" alt="Ekram Hossen — Graphic & UI Designer" class="img-fluid">
           </div>
         </div>
         <!-- Middle text -->
@@ -170,8 +170,8 @@ design solutions.</p>
          <ul class="list-unstyled m-0 p-0">
            <li><a href="https://www.behance.net/Ekramhossenemon"><i class="bi bi-behance"></i></a></li>
            <li><a href="https://www.linkedin.com/in/ekram-husain-emon/"><i class="bi bi-linkedin"></i></a></li>
-            <li><a href="https://wa.me/8801576521362"><i class="bi bi-whatsapp"></i></a></li>
-           <li><a href="#"><i class="bi bi-telegram"></i></a></li>
+            <li><a href="https://wa.me/+8801576521362"><i class="bi bi-whatsapp"></i></a></li>
+           <li><a href="https://t.me/ekramhossen" target="_blank"><i class="bi bi-telegram"></i></a></li>
            <li><a href="https://www.facebook.com/share/1N5oC8m5FM/"><i class="bi bi-facebook"></i></a></li>
          </ul>
          <p class="follow-text">Follow me:</p>
@@ -570,48 +570,33 @@ design solutions.</p>
 <!-- about me part ended -->
 
 <!-- Trusted By -->
+<!-- Trusted By -->
 <section class="client-section py-5">
   <div class="container">
-   <div class="section-title-box text-center mb-4">
+    <div class="section-title-box text-center mb-4">
       <div class="title-3d">
         <h2 class="section-title">Trusted By</h2>
       </div>
-
       <p class="section-subtitle mt-3">
         Proud to collaborate with leading brands & organizations
       </p>
     </div>
 
-
     <div class="client-wrapper">
       <div class="client-track">
-        <!-- 10 Client Items -->
-        <div class="client-item"><img src="{{asset ('frontend/assets/images/herbia logo design final.png ')}}" alt=""></div>
-        <div class="client-item"><img src="{{asset ('frontend/assets/images/al-Maarij-logo (7).png ')}}" alt=""></div>
-        <div class="client-item"><img src="{{asset ('frontend/assets/images/chatga agro logo.png ')}}" alt=""></div>
-        <div class="client-item"><img src="{{asset ('frontend/assets/images/golden-hotel-logo.png ')}}" alt=""></div>
-        <div class="client-item"><img src="{{asset ('frontend/assets/images/logo-ab agro.png ')}}" alt=""></div>
-        <div class="client-item"><img src="{{asset ('frontend/assets/images/porchex new logo.png ')}}" alt=""></div>
-        <div class="client-item"><img src="{{asset ('frontend/assets/images/Mavon final logo.png ')}}" alt=""></div>
-        <div class="client-item"><img src="{{asset ('frontend/assets/images/logo.png ')}}" alt=""></div>
-        <div class="client-item"><img src="{{asset ('frontend/assets/images/sabaco-logo.png ')}}" alt=""></div>
-        <div class="client-item"><img src="{{asset ('frontend/assets/images/wecards-logo-png.png ')}}" alt=""></div>
 
-        <!-- Duplicate for infinite loop -->
-        <div class="client-item"><img src="{{asset ('frontend/assets/images/al-haramain-logo.png ')}}" alt=""></div>
-        <div class="client-item"><img src="{{asset ('frontend/assets/images/kitchen-asia-logo.png ')}}" alt=""></div>
-        <div class="client-item"><img src="{{asset ('frontend/assets/images/kpdl-logo.png ')}}" alt=""></div>
-        <div class="client-item"><img src="{{asset ('frontend/assets/images/herbia logo design final.png ')}}" alt=""></div>
-        <div class="client-item"><img src="{{asset ('frontend/assets/images/chatga agro logo.png ')}}" alt=""></div>
-        <div class="client-item"><img src="{{asset ('frontend/assets/images/al-Maarij-logo (7).png ')}}" alt=""></div>
-        <div class="client-item"><img src="{{asset ('frontend/assets/images/golden-hotel-logo.png ')}}" alt=""></div>
-        <div class="client-item"><img src="{{asset ('frontend/assets/images/porchex new logo.png ')}}" alt=""></div>
-        <div class="client-item"><img src="{{asset ('frontend/assets/images/Mavon final logo.png ')}}" alt=""></div>
-        <div class="client-item"><img src="{{asset ('frontend/assets/images/wecards-logo-png.png ')}}" alt=""></div>
+        @foreach($clients as $client)
+          <div class="client-item">
+            <img src="{{ asset('storage/'.$client->logo) }}"
+                 alt="{{ $client->name }}">
+          </div>
+        @endforeach
+
       </div>
     </div>
   </div>
 </section>
+<!-- Trusted part ends -->
 
 <!-- Trusted part ends -->
  <!-- Contact part starts -->
@@ -735,7 +720,7 @@ design solutions.</p>
 
       <!-- Left Image (Fixed) -->
       <div class="col-lg-3 d-none d-lg-flex justify-content-center">
-        <img src="{{asset ('frontend/assets/images/Group 256.png ')}}" class="side-img" alt="">
+        <img src="{{asset ('frontend/assets/images/Group 256.png ')}}" class="side-img" alt="Side Icon">
       </div>
 
       <!-- Center Slider -->
@@ -783,7 +768,7 @@ design solutions.</p>
 
       <!-- Right Image (Fixed) -->
       <div class="col-lg-3 d-none d-lg-flex justify-content-center">
-        <img src="{{asset ('frontend/assets/images/Group 255.png ')}}" class="side-img" alt="">
+        <img src="{{asset ('frontend/assets/images/Group 255.png ')}}" class="side-img" alt="Side Icon">
       </div>
 
     </div>
@@ -803,7 +788,7 @@ design solutions.</p>
 
     <!-- Left: Image -->
     <div class="modal-left">
-      <img id="modalImg" src="" alt="">
+      <img id="modalImg" src="" alt="Model-Img">
     </div>
 
     <!-- Right: Info Panel -->
@@ -821,8 +806,8 @@ design solutions.</p>
       <div class="col-lg-6" data-aos="fade-up">
         <h2 class="fw-bold mb-3 mx-5">Get in Touch</h2>
         <p class="mb-4 mx-5" style="max-width:420px;">
-          Based in Chattogram, Bangladesh. Open to freelance projects
-and full-time opportunities in design.
+          Have a project in mind? I'd love to work with you. 
+  Let's create something meaningful together — reach out anytime.
         </p>
 
         <!-- Social Icons -->

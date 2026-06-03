@@ -7,6 +7,7 @@ use App\Models\Testimonial;
 use App\Models\Profile;
 use App\Models\Skill;
 use App\Models\Service;
+use App\Models\Client;
 use Illuminate\Http\Request;
 
 class FrontendController extends Controller
@@ -22,7 +23,11 @@ class FrontendController extends Controller
         $skills       = Skill::orderBy('sort_order')->get();
          $services     = Service::where('is_published', true)->orderBy('sort_order')->get();
 
-         return view('frontend.index', compact('works', 'testimonials', 'profile', 'skills', 'services'));
+         $clients = Client::where('is_published', true)
+                 ->orderBy('sort_order')
+                 ->get();
+
+         return view('frontend.index', compact('works', 'testimonials', 'profile', 'skills', 'services', 'clients'));
     }
    
 }

@@ -10,8 +10,8 @@
             <p class="text-muted mb-0">Manage all messages from your portfolio visitors.</p>
         </div>
         @php $pending = $contacts->where('status','pending')->count(); @endphp
-        @if($pending > 0)
-            <span class="badge bg-danger fs-6">{{ $pending }} Pending</span>
+       @if($pendingCount > 0)
+    <span class="badge bg-danger fs-6">{{ $pendingCount }} Pending</span>
         @endif
     </div>
 
@@ -40,7 +40,7 @@
                 <tbody>
                 @forelse($contacts as $i => $item)
                 <tr>
-                    <td class="text-muted small">{{ $i + 1 }}</td>
+                   <td class="text-muted small">{{ $contacts->firstItem() + $loop->index }}</td>
                     <td class="fw-semibold">{{ $item->name }}</td>
                     <td>
                         <a href="mailto:{{ $item->email }}" class="text-primary">{{ $item->email }}</a>
@@ -225,5 +225,11 @@
         @endforelse
     </div>
 
+     {{-- Pagination --}}
+    @if($contacts->hasPages())
+        <div class="d-flex justify-content-center mt-4">
+            {{ $contacts->links() }}
+        </div>
+    @endif
 </div>
 @endsection

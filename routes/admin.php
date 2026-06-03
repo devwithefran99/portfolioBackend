@@ -7,10 +7,12 @@ use App\Http\Controllers\Backend\WorkController;
 use App\Http\Controllers\Backend\TestimonialController;
 use App\Http\Controllers\Backend\ProfileController;
 use App\Http\Controllers\Backend\ServiceController;
+use App\Http\Controllers\Backend\ClientController;
 
 // ── Auth ───────────────────────────────────────────────────────
 Route::get('/login',  [LoginController::class, 'showLoginForm'])->name('login');
-Route::post('/login', [LoginController::class, 'login']);
+Route::post('/login', [LoginController::class, 'login'])
+     ->middleware('throttle:5,1');
 Route::post('/logout',[LoginController::class, 'logout'])->name('logout');
 
 // ── Admin protected routes ─────────────────────────────────────
@@ -50,5 +52,11 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::post('/dashboard/profile/update', [ProfileController::class, 'update'])->name('profile.update');
     Route::post('/dashboard/profile/skill/add', [ProfileController::class, 'storeSkill'])->name('skill.store');
     Route::delete('/dashboard/profile/skill/{skill}', [ProfileController::class, 'destroySkill'])->name('skill.destroy');
+
+
+    // trusted by
+      Route::resource('clients', ClientController::class)
+         ->except(['show']);
+
 
 });

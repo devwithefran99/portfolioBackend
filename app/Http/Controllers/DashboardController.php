@@ -38,7 +38,7 @@ class DashboardController extends Controller
         $request->validate([
             'name'    => 'required|string|max:255',
             'email'   => 'required|email|max:255',
-            'message' => 'required|string',
+             'message' => 'required|string|max:2000',
         ]);
 
         Contact::create([
@@ -51,11 +51,12 @@ class DashboardController extends Controller
     }
 
     // ── Contact Messages page (admin) ──────────────────────────
-    public function contacts()
-    {
-        $contacts = Contact::latest()->get();
-        return view('backend.contacts', compact('contacts'));
-    }
+   public function contacts()
+{
+    $contacts        = Contact::latest()->paginate(20);
+    $pendingCount    = Contact::where('status', 'pending')->count();
+    return view('backend.contacts', compact('contacts', 'pendingCount'));
+}
 
     // ── Mark done ──────────────────────────────────────────────
     public function done($id)
@@ -72,23 +73,45 @@ class DashboardController extends Controller
     }
 
     // ── Analytics page ─────────────────────────────────────────
-    public function analytics()
-    {
-        $totalVisitors   = Visitor::count();
-        $todayVisitors   = Visitor::whereDate('created_at', today())->count();
+   public function analytics()
+{
+    $totalVisitors  = Visitor::count();
+    $todayVisitors  = Visitor::whereDate('created_at', today())->count();
 
-        $monthlyVisitors = [];
-        for ($i = 1; $i <= 12; $i++) {
-            $monthName = Carbon::create()->month($i)->format('M');
-            $monthlyVisitors[$monthName] = Visitor::whereMonth('created_at', $i)->count();
-        }
+    // Unique visitors (distinct IP)
+    $uniqueVisitors = Visitor::distinct('ip')->count('ip');
 
-        return view('backend.analytics', compact(
-            'totalVisitors',
-            'todayVisitors',
-            'monthlyVisitors'
-        ));
+    // সবচেয়ে বেশি visit হওয়া দিন
+    $topDay = Visitor::selectRaw('DATE(created_at) as date, COUNT(*) as count')
+        ->groupBy('date')
+        ->orderByDesc('count')
+        ->first();
+
+    // Monthly chart data
+    $monthlyVisitors = [];
+    for ($i = 1; $i <= 12; $i++) {
+        $monthName = Carbon::create()->month($i)->format('M');
+        $monthlyVisitors[$monthName] = Visitor::whereMonth('created_at', $i)
+            ->whereYear('created_at', now()->year)
+            ->count();
     }
+
+    // Last 30 days daily breakdown (নতুন chart এর জন্য)
+    $dailyVisitors = [];
+    for ($i = 29; $i >= 0; $i--) {
+        $date = Carbon::today()->subDays($i);
+        $dailyVisitors[$date->format('M d')] = Visitor::whereDate('created_at', $date)->count();
+    }
+
+    return view('backend.analytics', compact(
+        'totalVisitors',
+        'todayVisitors',
+        'uniqueVisitors',
+        'topDay',
+        'monthlyVisitors',
+        'dailyVisitors'
+    ));
+}
 
     // ── Reply to contact ───────────────────────────────────────────
 public function reply(Request $request, $id)

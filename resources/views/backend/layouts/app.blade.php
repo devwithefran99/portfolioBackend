@@ -1,3 +1,4 @@
+@php $adminProfile = \App\Models\Profile::getSingle(); @endphp
 <!DOCTYPE html>
 <html
   lang="en"
@@ -36,6 +37,7 @@
     <link rel="stylesheet" href="{{asset('backend/assets/css/demo.css')}}" />
     <link rel="stylesheet" href="{{asset('backend/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css')}}" />
     <link rel="stylesheet" href="{{asset('backend/assets/vendor/libs/apex-charts/apex-charts.css')}}" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
 
     <script src="{{asset('backend/assets/vendor/js/helpers.js')}}"></script>
@@ -186,6 +188,26 @@
         </a>
     </li>
 
+    {{-- Trusted By / Clients --}}
+<li class="menu-item {{ request()->routeIs('clients.*') ? 'active open' : '' }}">
+    <a href="javascript:void(0);" class="menu-link menu-toggle">
+        <i class="menu-icon tf-icons bx bx-buildings"></i>
+        <div>Trusted By</div>
+    </a>
+    <ul class="menu-sub">
+        <li class="menu-item {{ request()->routeIs('clients.create') ? 'active' : '' }}">
+            <a href="{{ route('backend.clients.create') }}" class="menu-link">
+                <div>Add Client</div>
+            </a>
+        </li>
+        <li class="menu-item {{ request()->routeIs('clients.index') ? 'active' : '' }}">
+            <a href="{{ route('backend.clients.index') }}" class="menu-link">
+                <div>All Clients</div>
+            </a>
+        </li>
+    </ul>
+</li>
+
 </ul>
         </aside>
         <!-- / Menu -->
@@ -223,64 +245,72 @@
                
 
                 <!-- User -->
-                <li class="nav-item navbar-dropdown dropdown-user dropdown">
-                  <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
-                    <div class="avatar avatar-online">
-                      <img src="{{asset('backend/assets/img/avatars/my-image-2.png')}}" alt class="w-px-40 h-auto rounded-circle" />
-                    </div>
-                  </a>
-                  <ul class="dropdown-menu dropdown-menu-end">
-                    <li>
-                      <a class="dropdown-item" href="#">
-                        <div class="d-flex">
-                          <div class="flex-shrink-0 me-3">
-                            <div class="avatar avatar-online">
-                              <img src="{{asset('backend/assets/img/avatars/my-image-2.png')}}" alt class="w-px-40 h-auto rounded-circle" />
-                            </div>
-                          </div>
-                          <div class="flex-grow-1">
-                            <span class="fw-semibold d-block">John Doe</span>
-                            <small class="text-muted">Admin</small>
-                          </div>
-                        </div>
-                      </a>
-                    </li>
-                    <li>
-                      <div class="dropdown-divider"></div>
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="#">
-                        <i class="bx bx-user me-2"></i>
-                        <span class="align-middle">My Profile</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="#">
-                        <i class="bx bx-cog me-2"></i>
-                        <span class="align-middle">Settings</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="#">
-                        <span class="d-flex align-items-center align-middle">
-                          <i class="flex-shrink-0 bx bx-credit-card me-2"></i>
-                          <span class="flex-grow-1 align-middle">Billing</span>
-                          <span class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span>
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <div class="dropdown-divider"></div>
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="auth-login-basic.html">
-                        <i class="bx bx-power-off me-2"></i>
-                        <span class="align-middle">Log Out</span>
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <!--/ User -->
+<li class="nav-item navbar-dropdown dropdown-user dropdown">
+  <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
+    <div class="avatar avatar-online">
+     @if($adminProfile->photo)
+  <img src="{{ asset('storage/'.$adminProfile->photo) }}"
+       alt="{{ $adminProfile->name }}" class="w-px-40 h-auto rounded-circle">
+@else
+  <div class="w-px-40 h-px-40 rounded-circle bg-primary d-flex align-items-center justify-content-center text-white fw-bold">
+    {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
+  </div>
+@endif
+    </div>
+  </a>
+
+  <ul class="dropdown-menu dropdown-menu-end">
+
+    {{-- User info --}}
+    <li>
+      <a class="dropdown-item" href="{{ route('backend.profile.index') }}">
+        <div class="d-flex">
+          <div class="flex-shrink-0 me-3">
+            <div class="avatar avatar-online">
+             @if($adminProfile->photo)
+  <img src="{{ asset('storage/'.$adminProfile->photo) }}"
+       alt="{{ $adminProfile->name }}" class="w-px-40 h-auto rounded-circle">
+@else
+  <div class="w-px-40 h-px-40 rounded-circle bg-primary d-flex align-items-center justify-content-center text-white fw-bold">
+    {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
+  </div>
+@endif
+            </div>
+          </div>
+          <div class="flex-grow-1">
+           <span class="fw-semibold d-block">{{ $adminProfile->name }}</span>
+           <small class="text-muted">{{ auth()->user()->email }}</small>
+          </div>
+        </div>
+      </a>
+    </li>
+
+    <li><div class="dropdown-divider"></div></li>
+
+    {{-- Profile Settings --}}
+    <li>
+      <a class="dropdown-item" href="{{ route('backend.profile.index') }}">
+        <i class="bx bx-user me-2"></i>
+        <span class="align-middle">Profile Settings</span>
+      </a>
+    </li>
+
+    <li><div class="dropdown-divider"></div></li>
+
+    {{-- Logout --}}
+    <li>
+      <form method="POST" action="/logout">
+        @csrf
+        <button type="submit" class="dropdown-item">
+          <i class="bx bx-power-off me-2"></i>
+          <span class="align-middle">Log Out</span>
+        </button>
+      </form>
+    </li>
+
+  </ul>
+</li>
+<!--/ User -->
               </ul>
             </div>
           </nav>

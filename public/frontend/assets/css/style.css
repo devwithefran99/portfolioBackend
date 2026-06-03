@@ -1414,8 +1414,10 @@ nav ul li a.nav-link.nav-active::before {
   display: flex;
   gap: 20px;
   width: max-content;
+  will-change: transform;
   animation: slideMove 20s linear infinite;
   padding: 30px 0;
+  transition: none;
 }
 
 .client-item {

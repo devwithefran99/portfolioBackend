@@ -11,7 +11,7 @@
             <h4 class="fw-bold mb-1">
                 <span class="text-muted fw-light">Portfolio /</span> All Works
             </h4>
-            <p class="text-muted mb-0 small">মোট {{ $works->count() }}টি কাজ আছে</p>
+          <p class="text-muted mb-0 small">মোট {{ $totalWorks }}টি কাজ আছে</p>
         </div>
         <a href="{{ route('backend.works.create') }}" class="btn btn-primary">
             <i class="bx bx-plus me-1"></i> নতুন কাজ যোগ করো
@@ -31,7 +31,7 @@
         <ul class="nav nav-pills mb-3 gap-1" id="workTabs">
             <li class="nav-item">
                 <button class="nav-link active" data-filter="all">
-                    সব <span class="badge bg-primary ms-1">{{ $works->count() }}</span>
+                    সব <span class="badge bg-primary ms-1">{{ $totalWorks }}</span>
                 </button>
             </li>
             @foreach(['mobile' => ['Social Media','bx-mobile-alt'], 'web' => ['Web Design','bx-desktop'], 'social' => ['Branding','bx-palette']] as $key => $info)
@@ -117,6 +117,13 @@
                 </div>
             </div>
             @endforeach
+        </div>
+    @endif
+
+     {{-- Pagination --}}
+    @if($works->hasPages())
+        <div class="d-flex justify-content-center mt-4">
+            {{ $works->links() }}
         </div>
     @endif
 
