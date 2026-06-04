@@ -13,24 +13,42 @@ use Illuminate\Http\Request;
 class DashboardController extends Controller
 {
     public function index()
-    {
-        $totalWorks      = Work::count();
-        $totalVisitors   = Visitor::count();
-        $totalContacts   = Contact::count();
-        $pendingContacts = Contact::where('status', 'pending')->count();
+{
+    $totalWorks      = Work::count();
+    $totalVisitors   = Visitor::count();
+    $totalContacts   = Contact::count();
+    $pendingContacts = Contact::where('status', 'pending')->count();
 
-        $recentWorks    = Work::latest()->take(5)->get();
-        $recentContacts = Contact::latest()->take(5)->get();
+    $recentWorks    = Work::latest()->take(5)->get();
+    $recentContacts = Contact::latest()->take(5)->get();
+    $topWorks       = Work::orderByDesc('views')->take(5)->get();
 
-        return view('backend.dashboard', compact(
-            'totalWorks',
-            'totalVisitors',
-            'totalContacts',
-            'pendingContacts',
-            'recentWorks',
-            'recentContacts'
-        ));
+    // Chart data
+    $monthlyVisitors = [];
+    $monthlyContacts = [];
+    for ($i = 1; $i <= 12; $i++) {
+        $monthName = Carbon::create()->month($i)->format('M');
+        $monthlyVisitors[$monthName] = Visitor::whereMonth('created_at', $i)
+                                              ->whereYear('created_at', now()->year)
+                                              ->count();
+        $monthlyContacts[$monthName] = Contact::whereMonth('created_at', $i)
+                                              ->whereYear('created_at', now()->year)
+                                              ->count();
     }
+
+    $worksByCategory = [
+        'Social Media' => Work::where('category', 'mobile')->count(),
+        'Web Design'   => Work::where('category', 'web')->count(),
+        'Branding'     => Work::where('category', 'social')->count(),
+    ];
+
+    // ← শেষে একটাই return
+    return view('backend.dashboard', compact(
+        'totalWorks', 'totalVisitors', 'totalContacts', 'pendingContacts',
+        'recentWorks', 'recentContacts', 'topWorks',
+        'monthlyVisitors', 'monthlyContacts', 'worksByCategory'
+    ));
+}
 
     // ── Contact form submit (frontend public) ──────────────────
     public function store(Request $request)

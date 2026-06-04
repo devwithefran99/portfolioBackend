@@ -84,6 +84,110 @@
 
     </div>
 
+
+    {{-- chart --}}
+
+    <!-- ── Charts Section ── -->
+<div class="container-xxl mt-4">
+    <div class="row g-4">
+
+        {{-- Chart 2: Works by Category (Donut) --}}
+        <div class="col-md-5">
+            <div class="card shadow-sm h-100">
+                <div class="card-header d-flex align-items-center gap-2">
+                    <i class="bx bx-doughnut-chart text-warning fs-5"></i>
+                    <h6 class="mb-0 fw-semibold">Works by Category</h6>
+                </div>
+                <div class="card-body d-flex justify-content-center">
+                    <div id="categoryChart"></div>
+                </div>
+            </div>
+        </div>
+
+        {{-- Chart 3: Monthly Contacts (Bar) --}}
+        <div class="col-md-7">
+            <div class="card shadow-sm h-100">
+                <div class="card-header d-flex align-items-center gap-2">
+                    <i class="bx bx-bar-chart-alt-2 text-success fs-5"></i>
+                    <h6 class="mb-0 fw-semibold">Monthly Messages — {{ now()->year }}</h6>
+                </div>
+                <div class="card-body">
+                    <div id="contactChart"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    // ── Chart 1: Visitor Area Chart ──
+    new ApexCharts(document.querySelector("#visitorChart"), {
+        chart: { type: 'area', height: 300, toolbar: { show: false }, zoom: { enabled: false } },
+        series: [{ name: 'Visitors', data: {!! json_encode(array_values($monthlyVisitors)) !!} }],
+        xaxis: { categories: {!! json_encode(array_keys($monthlyVisitors)) !!} },
+        stroke: { curve: 'smooth', width: 2 },
+        fill: { type: 'gradient', gradient: { opacityFrom: 0.5, opacityTo: 0.05 } },
+        colors: ['#696cff'],
+        dataLabels: { enabled: false },
+        grid: { borderColor: '#f1f1f1' },
+        tooltip: { theme: 'light' }
+    }).render();
+
+    // ── Chart 2: Category Donut Chart ──
+    new ApexCharts(document.querySelector("#categoryChart"), {
+        chart: { type: 'donut', height: 280 },
+        series: {!! json_encode(array_values($worksByCategory)) !!},
+        labels: {!! json_encode(array_keys($worksByCategory)) !!},
+        colors: ['#696cff', '#03c3ec', '#ffab00'],
+        legend: { position: 'bottom' },
+        dataLabels: { enabled: true },
+        plotOptions: {
+            pie: { donut: { size: '65%', labels: { show: true, total: { show: true, label: 'Total Works' } } } }
+        }
+    }).render();
+
+    // ── Chart 3: Contact Bar Chart ──
+    new ApexCharts(document.querySelector("#contactChart"), {
+        chart: { type: 'bar', height: 280, toolbar: { show: false } },
+        series: [{ name: 'Messages', data: {!! json_encode(array_values($monthlyContacts)) !!} }],
+        xaxis: { categories: {!! json_encode(array_keys($monthlyContacts)) !!} },
+        colors: ['#71dd37'],
+        dataLabels: { enabled: false },
+        plotOptions: { bar: { borderRadius: 6, columnWidth: '50%' } },
+        grid: { borderColor: '#f1f1f1' },
+        tooltip: { theme: 'light' }
+    }).render();
+
+});
+</script>
+{{-- work ststs --}}
+    <div class="card my-4">
+    <div class="card-header">🔥 Top 5 Most Viewed Works</div>
+    <div class="card-body p-0">
+        <table class="table mb-0">
+            <thead class="table-light">
+                <tr><th>Work</th><th class="text-center">Views</th><th class="text-center">Likes</th></tr>
+            </thead>
+            <tbody>
+                @foreach($topWorks as $w)
+                <tr>
+                    <td>{{ $w->title }}</td>
+                    <td class="text-center text-primary fw-bold">{{ $w->views }}</td>
+                    <td class="text-center text-danger fw-bold">{{ $w->likes }}</td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+    <div class="card-footer text-end">
+        <a href="{{ route('backend.works.stats') }}" class="btn btn-sm btn-outline-primary">See All →</a>
+    </div>
+</div>
+
     {{-- ── Recent Works + Recent Messages ── --}}
     <div class="row g-3 mb-4">
 

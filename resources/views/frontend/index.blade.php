@@ -10,6 +10,7 @@
     <meta name="keywords" content="Graphic Designer, UI Designer, Branding, Chattogram, Bangladesh, Ekram Hossen, Photoshop, Figma, Illustrator">
     <meta name="author" content="Ekram Hossen">
     <meta name="robots" content="index, follow">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Canonical URL -->
     {{-- <link rel="canonical" href="https://yourdomain.com/"> --}}
@@ -294,14 +295,14 @@ design solutions.</p>
         @if($work->popup_image)
         {{-- Card with popup trigger --}}
         <div class="work-card popup-trigger"
-             data-img="{{ asset('storage/' . $work->popup_image) }}">
+             data-img="{{ asset('storage/' . $work->popup_image) }}"  data-id="{{ $work->id }}">
           <div class="img-wrapper">
             <img src="{{ asset('storage/' . $work->cover_image) }}"
                  class="w-100" alt="{{ $work->title }}">
             <div class="overlay">
               <div class="icons">
-                <span class="icon view"><i class="bi bi-eye"></i></span>
-                <span class="icon love"><i class="bi bi-heart"></i></span>
+<span class="icon view" data-work-id="{{ $work->id }}"><i class="bi bi-eye"></i></span>
+                <span class="icon love" data-work-id="{{ $work->id }}"><i class="bi bi-heart"></i></span>
               </div>
             </div>
           </div>
@@ -319,7 +320,7 @@ design solutions.</p>
                  class="w-100" alt="{{ $work->title }}">
             <div class="overlay">
               <div class="icons">
-                <span class="icon love"><i class="bi bi-heart"></i></span>
+               <span class="icon love" data-work-id="{{ $work->id }}"><i class="bi bi-heart"></i></span>
               </div>
             </div>
           </div>

@@ -147,6 +147,13 @@
             </li>
         </ul>
     </li>
+{{-- Work Stats --}}
+    <li class="menu-item {{ request()->routeIs('works.stats') ? 'active' : '' }}">
+    <a href="{{ route('backend.works.stats') }}" class="menu-link">
+        <i class="menu-icon bx bx-bar-chart-alt-2"></i>
+        <div>Work Stats</div>
+    </a>
+</li>
 
     {{-- Contact Messages --}}
     <li class="menu-item {{ request()->routeIs('contacts.index') ? 'active' : '' }}">

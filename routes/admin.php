@@ -58,5 +58,9 @@ Route::middleware(['auth', 'admin'])->group(function () {
       Route::resource('clients', ClientController::class)
          ->except(['show']);
 
+        //  work stats
+
+        Route::get('/works/stats', [WorkController::class, 'stats'])->name('works.stats');
+
 
 });

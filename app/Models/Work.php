@@ -14,6 +14,8 @@ class Work extends Model
         'work_date',
         'is_extra',
         'sort_order',
+        'views',  
+        'likes',  
     ];
 
     protected $casts = [

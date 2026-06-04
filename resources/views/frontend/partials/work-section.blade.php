@@ -36,14 +36,15 @@
         @if($work->popup_image)
         {{-- Card with popup trigger --}}
         <div class="work-card popup-trigger"
-             data-img="{{ asset('storage/' . $work->popup_image) }}">
+             data-img="{{ asset('storage/' . $work->popup_image) }}"
+             data-id="{{ $work->id }}">
           <div class="img-wrapper">
             <img src="{{ asset('storage/' . $work->cover_image) }}"
                  class="w-100" alt="{{ $work->title }}">
             <div class="overlay">
               <div class="icons">
-                <span class="icon view"><i class="bi bi-eye"></i></span>
-                <span class="icon love"><i class="bi bi-heart"></i></span>
+                <span class="icon view" data-work-id="{{ $work->id }}"><i class="bi bi-eye"></i></span>
+                <span class="icon love"  data-work-id="{{ $work->id }}"><i class="bi bi-heart"></i></span>
               </div>
             </div>
           </div>
@@ -55,13 +56,13 @@
 
         @else
         {{-- Card without popup --}}
-        <div class="work-card">
+        <div class="work-card" data-id="{{ $work->id }}">
           <div class="img-wrapper">
             <img src="{{ asset('storage/' . $work->cover_image) }}"
                  class="w-100" alt="{{ $work->title }}">
             <div class="overlay">
               <div class="icons">
-                <span class="icon love"><i class="bi bi-heart"></i></span>
+              <span class="icon love" data-work-id="{{ $work->id }}"><i class="bi bi-heart"></i></span>
               </div>
             </div>
           </div>

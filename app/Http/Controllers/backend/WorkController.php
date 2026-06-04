@@ -60,6 +60,13 @@ class WorkController extends Controller
         return redirect()->route('backend.works.index')
                          ->with('success', '✅ নতুন কাজ সফলভাবে যোগ হয়েছে!');
     }
+    // work stats
+    public function stats()
+{
+    $topViewed = Work::orderByDesc('views')->get();
+    $topLiked  = Work::orderByDesc('likes')->get();
+    return view('backend.works.stats', compact('topViewed', 'topLiked'));
+}
 
     /* ─── Edit Form ──────────────────────────────────────────── */
     public function edit(Work $work)

@@ -1171,7 +1171,11 @@ nav ul li a.nav-link.nav-active::before {
 .icon.love.active{
   background: #ff4d6d;
   color:#fff;
+   border-radius: 50%;
 }
+/* Heart active state */
+
+
 
 /* hover effect */
 .work-card:hover .overlay{

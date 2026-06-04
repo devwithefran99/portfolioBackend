@@ -50,3 +50,20 @@ height: 30px;
 }
 
 
+@media (max-width: 768px) {
+    /* overlay সবসময় দেখাবে */
+    .work-card .overlay {
+        opacity: 1 !important;
+    }
+
+    /* icons সবসময় দেখাবে */
+    .work-card .icons {
+        transform: translateX(0) !important;
+        opacity: 1 !important;
+    }
+
+    /* card hover effect mobile এ বন্ধ */
+    .work-card:hover {
+        transform: none;
+    }
+}

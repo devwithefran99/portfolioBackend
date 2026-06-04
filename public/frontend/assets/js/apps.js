@@ -232,12 +232,51 @@ toggleBtn.onclick = ()=>{
   toggleBtn.innerText = expanded ? "Show Less" : "Show More";
 };
 
-// work toggle start
-document.querySelectorAll(".icon.love").forEach(btn=>{
-  btn.addEventListener("click",(e)=>{
-    e.stopPropagation(); // popup na khulte
-    btn.classList.toggle("active");
-  });
+// ──── Work View & Like Tracking ────
+const CSRF = document.querySelector('meta[name="csrf-token"]')?.content;
+
+// 👁️ Eye click → view +1
+document.querySelectorAll(".icon.view").forEach(btn => {
+    btn.addEventListener("click", function (e) {
+        // stopPropagation নেই — popup trigger হবে normally
+        const workId = this.dataset.workId;
+        if (workId) {
+            fetch(`/work/${workId}/view`, {
+                method: 'POST',
+                headers: { 'X-CSRF-TOKEN': CSRF, 'Content-Type': 'application/json' }
+            });
+        }
+    });
+});
+
+// ❤️ Heart click → like toggle (localStorage শুধু UI state এর জন্য)
+document.querySelectorAll(".icon.love").forEach(btn => {
+    const workId = btn.dataset.workId;
+
+    // page load এ liked state দেখাও
+    if (localStorage.getItem(`liked_${workId}`)) {
+        btn.classList.add('active');
+    }
+
+    btn.addEventListener("click", function (e) {
+        e.stopPropagation();
+        const isLiked = localStorage.getItem(`liked_${workId}`);
+        const action  = isLiked ? 'unlike' : 'like';
+
+        fetch(`/work/${workId}/like`, {
+            method: 'POST',
+            headers: { 'X-CSRF-TOKEN': CSRF, 'Content-Type': 'application/json' },
+            body: JSON.stringify({ action })
+        }).then(res => res.json()).then(() => {
+            if (action === 'like') {
+                localStorage.setItem(`liked_${workId}`, '1');
+                btn.classList.add('active');
+            } else {
+                localStorage.removeItem(`liked_${workId}`);
+                btn.classList.remove('active');
+            }
+        });
+    });
 });
 // work toggle ends
 
@@ -280,48 +319,49 @@ srvItems.forEach(item => {
   });
 });
 
-// image-models starts
+
+// ──── Popup (image modal) ────
 const cards = document.querySelectorAll(".popup-trigger");
 const modal = document.getElementById("imageModal");
 const modalImg = document.getElementById("modalImg");
 const closeBtn = document.querySelector(".close-btn");
-const viewCount = document.getElementById("viewCount");
+const viewCount = document.getElementById("viewCount"); // null হলেও সমস্যা নেই
 
-cards.forEach((card, index) => {
-  card.addEventListener("click", () => {
-    const popupImage = card.getAttribute("data-img");
+cards.forEach((card) => {
+    card.addEventListener("click", () => {
+        const popupImage = card.getAttribute("data-img");
+        const workId = card.dataset.id; // ← DB থেকে view count নেবে
 
-    modal.classList.add("active");
-    modalImg.src = popupImage;
+        modal.classList.add("active");
+        modalImg.src = popupImage;
 
-    // fake view count (localStorage)
-    let views = localStorage.getItem("views_" + index);
-    views = views ? parseInt(views) + 1 : 1;
-    localStorage.setItem("views_" + index, views);
+        // DB তে view track করো
+        if (workId) {
+            fetch(`/work/${workId}/view`, {
+                method: 'POST',
+                headers: { 'X-CSRF-TOKEN': CSRF, 'Content-Type': 'application/json' }
+            });
+        }
 
-    viewCount.innerText = views;
-  });
+        // viewCount element থাকলে দেখাও, না থাকলে skip
+        if (viewCount) viewCount.innerText = '';
+    });
 });
 
 // close
 closeBtn.addEventListener("click", () => {
-  modal.classList.remove("active");
+    modal.classList.remove("active");
 });
 
 // outside click
 modal.addEventListener("click", (e) => {
-  if (e.target === modal) {
-    modal.classList.remove("active");
-  }
+    if (e.target === modal) modal.classList.remove("active");
 });
 
 // ESC
 document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape") {
-    modal.classList.remove("active");
-  }
+    if (e.key === "Escape") modal.classList.remove("active");
 });
-  // image-model ends
  
  $(document).ready(function () {
 
