@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
-    public function index()
+  public function index()
 {
     $totalWorks      = Work::count();
     $totalVisitors   = Visitor::count();
@@ -23,26 +23,38 @@ class DashboardController extends Controller
     $recentContacts = Contact::latest()->take(5)->get();
     $topWorks       = Work::orderByDesc('views')->take(5)->get();
 
-    // Chart data
+    // ── Monthly Visitors — single query (was: 12 queries) ──────
+    $visitorRows = Visitor::selectRaw('MONTH(created_at) as month, COUNT(*) as total')
+        ->whereYear('created_at', now()->year)
+        ->groupBy('month')
+        ->pluck('total', 'month');
+
+    // ── Monthly Contacts — single query (was: 12 queries) ──────
+    $contactRows = Contact::selectRaw('MONTH(created_at) as month, COUNT(*) as total')
+        ->whereYear('created_at', now()->year)
+        ->groupBy('month')
+        ->pluck('total', 'month');
+
+    // 12 মাসের array বানাও, missing month = 0
     $monthlyVisitors = [];
     $monthlyContacts = [];
     for ($i = 1; $i <= 12; $i++) {
         $monthName = Carbon::create()->month($i)->format('M');
-        $monthlyVisitors[$monthName] = Visitor::whereMonth('created_at', $i)
-                                              ->whereYear('created_at', now()->year)
-                                              ->count();
-        $monthlyContacts[$monthName] = Contact::whereMonth('created_at', $i)
-                                              ->whereYear('created_at', now()->year)
-                                              ->count();
+        $monthlyVisitors[$monthName] = $visitorRows[$i] ?? 0;
+        $monthlyContacts[$monthName] = $contactRows[$i] ?? 0;
     }
 
+    // ── Works by Category — single query (was: 3 queries) ──────
+    $categoryRows = Work::selectRaw('category, COUNT(*) as total')
+        ->groupBy('category')
+        ->pluck('total', 'category');
+
     $worksByCategory = [
-        'Social Media' => Work::where('category', 'mobile')->count(),
-        'Web Design'   => Work::where('category', 'web')->count(),
-        'Branding'     => Work::where('category', 'social')->count(),
+        'Social Media' => $categoryRows['mobile'] ?? 0,
+        'Web Design'   => $categoryRows['web']    ?? 0,
+        'Branding'     => $categoryRows['social'] ?? 0,
     ];
 
-    // ← শেষে একটাই return
     return view('backend.dashboard', compact(
         'totalWorks', 'totalVisitors', 'totalContacts', 'pendingContacts',
         'recentWorks', 'recentContacts', 'topWorks',
@@ -91,34 +103,42 @@ class DashboardController extends Controller
     }
 
     // ── Analytics page ─────────────────────────────────────────
-   public function analytics()
+  public function analytics()
 {
     $totalVisitors  = Visitor::count();
     $todayVisitors  = Visitor::whereDate('created_at', today())->count();
-
-    // Unique visitors (distinct IP)
     $uniqueVisitors = Visitor::distinct('ip')->count('ip');
 
-    // সবচেয়ে বেশি visit হওয়া দিন
     $topDay = Visitor::selectRaw('DATE(created_at) as date, COUNT(*) as count')
         ->groupBy('date')
         ->orderByDesc('count')
         ->first();
 
-    // Monthly chart data
+    // ── Monthly — single query (was: 12 queries) ───────────────
+    $visitorRows = Visitor::selectRaw('MONTH(created_at) as month, COUNT(*) as total')
+        ->whereYear('created_at', now()->year)
+        ->groupBy('month')
+        ->pluck('total', 'month');
+
     $monthlyVisitors = [];
     for ($i = 1; $i <= 12; $i++) {
         $monthName = Carbon::create()->month($i)->format('M');
-        $monthlyVisitors[$monthName] = Visitor::whereMonth('created_at', $i)
-            ->whereYear('created_at', now()->year)
-            ->count();
+        $monthlyVisitors[$monthName] = $visitorRows[$i] ?? 0;
     }
 
-    // Last 30 days daily breakdown (নতুন chart এর জন্য)
+    // ── Last 30 days — single query (was: 30 queries) ──────────
+    $startDate = Carbon::today()->subDays(29);
+
+    $dailyRows = Visitor::selectRaw('DATE(created_at) as date, COUNT(*) as total')
+        ->whereDate('created_at', '>=', $startDate)
+        ->groupBy('date')
+        ->pluck('total', 'date');
+
     $dailyVisitors = [];
     for ($i = 29; $i >= 0; $i--) {
         $date = Carbon::today()->subDays($i);
-        $dailyVisitors[$date->format('M d')] = Visitor::whereDate('created_at', $date)->count();
+        $key  = $date->format('M d');
+        $dailyVisitors[$key] = $dailyRows[$date->toDateString()] ?? 0;
     }
 
     return view('backend.analytics', compact(

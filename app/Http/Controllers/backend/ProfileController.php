@@ -91,4 +91,37 @@ class ProfileController extends Controller
         $skill->delete();
         return back()->with('success', '🗑️ Skill মুছে ফেলা হয়েছে!');
     }
+
+    // ── Account settings page ──────────────────────────────────
+public function accountSettings()
+{
+    return view('backend.profile.account');
+}
+
+// ── Update email / password ────────────────────────────────
+public function updateAccount(Request $request)
+{
+    $user = auth()->user();
+
+    $request->validate([
+        'email'            => 'required|email|unique:users,email,' . $user->id,
+        'current_password' => 'required',
+        'new_password'     => 'nullable|string|min:8|confirmed',
+    ]);
+
+    // current password চেক
+    if (!\Hash::check($request->current_password, $user->password)) {
+        return back()->withErrors(['current_password' => 'Current password ভুল হয়েছে।']);
+    }
+
+    $user->email = $request->email;
+
+    if ($request->filled('new_password')) {
+        $user->password = \Hash::make($request->new_password);
+    }
+
+    $user->save();
+
+    return back()->with('success', '✅ Account আপডেট হয়েছে!');
+}
 }

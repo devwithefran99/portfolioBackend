@@ -164,32 +164,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 </script>
-{{-- work ststs --}}
-    <div class="card my-4">
-    <div class="card-header">🔥 Top 5 Most Viewed Works</div>
-    <div class="card-body p-0">
-        <table class="table mb-0">
-            <thead class="table-light">
-                <tr><th>Work</th><th class="text-center">Views</th><th class="text-center">Likes</th></tr>
-            </thead>
-            <tbody>
-                @foreach($topWorks as $w)
-                <tr>
-                    <td>{{ $w->title }}</td>
-                    <td class="text-center text-primary fw-bold">{{ $w->views }}</td>
-                    <td class="text-center text-danger fw-bold">{{ $w->likes }}</td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
-    <div class="card-footer text-end">
-        <a href="{{ route('backend.works.stats') }}" class="btn btn-sm btn-outline-primary">See All →</a>
-    </div>
-</div>
+
 
     {{-- ── Recent Works + Recent Messages ── --}}
-    <div class="row g-3 mb-4">
+    <div class="row g-3 my-4">
 
         {{-- Recent Works --}}
         <div class="col-md-6">

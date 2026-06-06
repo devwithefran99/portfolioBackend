@@ -29,6 +29,10 @@ Route::middleware(['auth', 'admin'])->group(function () {
     // Analytics page
     Route::get('/dashboard/analytics', [DashboardController::class, 'analytics'])->name('analytics.index');
 
+    //  work stats
+
+        Route::get('/works/stats', [WorkController::class, 'stats'])->name('works.stats');
+
     // Works CRUD
     Route::prefix('dashboard')->group(function () {
         Route::resource('works', WorkController::class);
@@ -58,9 +62,11 @@ Route::middleware(['auth', 'admin'])->group(function () {
       Route::resource('clients', ClientController::class)
          ->except(['show']);
 
-        //  work stats
+         // Account Settings
+Route::get('/dashboard/account', [ProfileController::class, 'accountSettings'])->name('account.settings');
+Route::post('/dashboard/account/update', [ProfileController::class, 'updateAccount'])->name('account.update');
 
-        Route::get('/works/stats', [WorkController::class, 'stats'])->name('works.stats');
+        
 
 
 });

@@ -16,8 +16,8 @@
     {{-- <link rel="canonical" href="https://yourdomain.com/"> --}}
 
     <!-- ✅ Favicon -->
-    <link rel="icon" type="image/png" href="{{ asset('frontend/assets/images/ekram logo.png') }}">
-    <link rel="apple-touch-icon" href="{{ asset('frontend/assets/images/ekram logo.png') }}">
+    <link rel="icon" type="image/png" href="{{ asset('frontend/assets/images/ekramlogo.png') }}">
+    <link rel="apple-touch-icon" href="{{ asset('frontend/assets/images/ekramlogo.png') }}">
 
     <!-- ✅ Open Graph (Facebook, LinkedIn share) -->
     <meta property="og:type" content="website">
@@ -49,7 +49,7 @@
 <!-- Preloader -->
 <div id="preloader">
   <div class="loader-wrapper">
-    <img src="{{asset ('frontend/assets/images/ekram logo.png ')}}" alt="Logo" class="logo">
+    <img src="{{asset ('frontend/assets/images/ekramlogo.png ')}}" alt="Logo" class="logo">
     <div class="glow"></div>
   </div>
 </div>
@@ -59,14 +59,14 @@
          <section id="Home">
            <nav class="navbar navbar-expand-lg">
   <div class="container">
-    <a class="navbar-brand" href="#offcanvasExample"><img class="img-fluid" src="{{asset ('frontend/assets/images/ekram logo.png ')}}" alt="Ekram Hossen — Graphic & UI Designer Logo"></a>
+    <a class="navbar-brand" href="#offcanvasExample"><img class="img-fluid" src="{{asset ('frontend/assets/images/ekramlogo.png ')}}" alt="Ekram Hossen — Graphic & UI Designer Logo"></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <a role="button" aria-controls="offcanvasExample" href="#offcanvasExample" data-bs-toggle="offcanvas"><i class="bi bi-list"></i></a>
     </button>
     <!-- side bar starts -->
      <div class="offcanvas offcanvas-start d-lg-none" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
   <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="offcanvasExampleLabel"><img class="img-fluid" src="{{asset ('frontend/assets/images/ekram logo.png ')}}" alt="Ekram Hossen — Graphic & UI Designer Logo"></h5>
+    <h5 class="offcanvas-title" id="offcanvasExampleLabel"><img class="img-fluid" src="{{asset ('frontend/assets/images/ekramlogo.png ')}}" alt="Ekram Hossen — Graphic & UI Designer Logo"></h5>
     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
  <ul class="navbar-nav">
@@ -782,18 +782,11 @@ design solutions.</p>
 
 <!-- Image Modal -->
 <div id="imageModal" class="image-modal">
+  <span class="close-btn" id="closeBtn">&times;</span>  <!-- বাইরে -->
   <div class="modal-content">
-
-    <!-- Close -->
-    <span class="close-btn">&times;</span>
-
-    <!-- Left: Image -->
     <div class="modal-left">
-      <img id="modalImg" src="" alt="Model-Img">
+      <img id="modalImg" src="" alt="Modal-Img">
     </div>
-
-    <!-- Right: Info Panel -->
-
   </div>
 </div>
 <!-- image model ends -->

@@ -55,23 +55,24 @@
         </div>
 
         @else
-        {{-- Card without popup --}}
-        <div class="work-card" data-id="{{ $work->id }}">
-          <div class="img-wrapper">
-            <img src="{{ asset('storage/' . $work->cover_image) }}"
-                 class="w-100" alt="{{ $work->title }}">
-            <div class="overlay">
-              <div class="icons">
-              <span class="icon love" data-work-id="{{ $work->id }}"><i class="bi bi-heart"></i></span>
-              </div>
-            </div>
-          </div>
-          <div class="content">
-            <span class="date">{{ $work->work_date ? $work->work_date->format('d M Y') : '' }}</span>
-            <h6>{{ $work->title }}</h6>
-          </div>
-        </div>
-        @endif
+{{-- Card without popup --}}
+<div class="work-card" data-id="{{ $work->id }}">
+  <div class="img-wrapper">
+    <img src="{{ asset('storage/' . $work->cover_image) }}"
+         class="w-100" alt="{{ $work->title }}">
+    <div class="overlay">
+      <div class="icons">
+        <span class="icon view" data-work-id="{{ $work->id }}"><i class="bi bi-eye"></i></span>
+        <span class="icon love" data-work-id="{{ $work->id }}"><i class="bi bi-heart"></i></span>
+      </div>
+    </div>
+  </div>
+  <div class="content">
+    <span class="date">{{ $work->work_date ? $work->work_date->format('d M Y') : '' }}</span>
+    <h6>{{ $work->title }}</h6>
+  </div>
+</div>
+@endif
 
       </div>
       @empty
